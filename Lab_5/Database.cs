@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Lab_5
 {
-    // Thêm ghi chú ở đây
     public class Database
     {
         public static string DbFileName { get; set; }
