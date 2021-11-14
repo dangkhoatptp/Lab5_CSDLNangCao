@@ -13,6 +13,13 @@ namespace Lab_5
         public string DName { get; set; }
         public List<string> Locations { get; set; }
 
+        public Department(int number = 0, string name = "", List<string> locations = null)
+        {
+            DNumber = number;
+            DName = name;
+            Locations = locations;
+        }
+
         // Quan hệ
         public List<Employee> Employees { get; set; }
         public Employee Manager { get; set; }

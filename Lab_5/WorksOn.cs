@@ -11,6 +11,11 @@ namespace Lab_5
         // Thuộc tính
         public float Hours { get; set; }
 
+        public WorksOn(float hours = 0)
+        {
+            Hours = hours;
+        }
+
         // Quan hệ
         public Employee Employee { get; set; }
         public Project Project { get; set; }
