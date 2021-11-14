@@ -29,6 +29,10 @@ namespace Lab_5
             CreateProject("data_Project.txt");
             CreateDepartment("data_Department.txt");
             CreateWorksOn("data_WorksOn.txt");
+            SetManager("SetManager.txt");
+            SetControlledBy("SetControlledBy.txt");
+            SetWorksFor("SetWorksFor.txt");
+            SetSupervisors("SetSupervisors.txt");
         }
         public static void CreateDependents(string fileName)
         {
@@ -76,10 +80,21 @@ namespace Lab_5
                         IObjectSet result_Employee = DB.QueryByExample(e);
                         if(result_Employee.Count != 0)
                         {
-                            d.DependentOf = (Employee)result_Employee[0];
+                            Employee employee = (Employee)result_Employee[0];
+                            d.DependentOf = employee;
+                            if(employee.Dependents == null)
+                            {
+                                employee.Dependents = new List<Dependent>();
+                                employee.Dependents.Add(d);
+                            }
+                            else
+                            {
+                                employee.Dependents.Add(d);
+                            }
+                            
+                            DB.Store(d);
+                            DB.Store(employee);
                         }
-
-                        DB.Store(d);
                     }
                 }
                 fin.Close();
@@ -280,13 +295,17 @@ namespace Lab_5
                             Hours = hours
                         };
 
+                        Employee e = null;
+                        Project p = null;
+
                         // Tìm Employee với Ssn = ssn_Employee
                         // Điều kiện: trong database phải có sẵn dữ liệu Employee thì mới tìm được
                         Employee employee = new Employee(ssn_Employee, null, null, null, null, null, 0, null);
                         IObjectSet result_Employee = DB.QueryByExample(employee);
                         if(result_Employee.Count != 0)
                         {
-                            w.Employee = (Employee)result_Employee[0];
+                            e = (Employee)result_Employee[0];
+                            w.Employee = e;
                         }
 
                         // Tìm Project với PNumber = number_Project
@@ -295,9 +314,26 @@ namespace Lab_5
                         IObjectSet result_Project = DB.QueryByExample(project);
                         if (result_Project.Count != 0)
                         {
-                            w.Project = (Project)result_Project[0];
+                            p = (Project)result_Project[0];
+                            w.Project = p;
                         }
 
+                        if(e.WorksOn == null)
+                        {
+                            e.WorksOn = new List<WorksOn>();
+                            e.WorksOn.Add(w);
+                        }
+                        else e.WorksOn.Add(w);
+
+                        if (p.WorksOn == null)
+                        {
+                            p.WorksOn = new List<WorksOn>();
+                            p.WorksOn.Add(w);
+                        }
+                        else p.WorksOn.Add(w);
+
+                        DB.Store(e);
+                        DB.Store(p);
                         DB.Store(w);
                     }
                 }
@@ -334,6 +370,238 @@ namespace Lab_5
             WorksOn w = new WorksOn(0);
             IObjectSet result = DB.QueryByExample(w);
             return result;
+        }
+        public static void SetManager(string fileName)
+        {
+            // Đọc dữ liệu từ file .txt
+            if (File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); 
+
+                for (int i = 0; i < n; ++i)
+                {
+                    string line = fin.ReadLine();
+
+                    if (line != null)
+                    {
+                        string[] fields = line.Split(',');
+
+                        int number_Department = int.Parse(fields[0]);
+                        int ssn_Employee = int.Parse(fields[1]);
+                        string mgrStartDate = fields[2];
+
+                        Employee e = null;
+                        Department d = null;
+
+                        // Tìm Employee với Ssn = ssn_Employee
+                        // Điều kiện: phải có sẵn dữ liệu Employee trong database mới tìm được
+                        Employee employee = new Employee(ssn_Employee, null, null, null, null, null, 0, null);
+                        IObjectSet result_Employee = DB.QueryByExample(employee);
+                        if(result_Employee.Count != 0)
+                        {
+                            e = (Employee)result_Employee[0];
+                        }
+
+                        // Tìm Department với DNumber = number_Department
+                        // Điều kiện: phải có sẵn dữ liệu Department trong database mới tìm được
+                        Department department = new Department(number_Department, null, null);
+                        IObjectSet result_Department = DB.QueryByExample(department);
+                        if(result_Department.Count != 0)
+                        {
+                            d = (Department)result_Department[0];
+                        }
+
+                        // Thiết lập quan hệ Manager (giữa Employee và Department)
+                        if(e != null && d != null)
+                        {
+                            d.MgrStartDate = mgrStartDate;
+                            d.Manager = e;
+                            e.Manager = d;
+                            DB.Store(d);
+                            DB.Store(e);
+                        }
+                    }
+                }
+                fin.Close();
+                fs.Close();
+            }
+        }
+        public static void SetControlledBy(string fileName)
+        {
+            // Đọc dữ liệu từ file .txt
+            if (File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); 
+
+                for (int i = 0; i < n; ++i)
+                {
+                    string line = fin.ReadLine();
+
+                    if (line != null)
+                    {
+                        string[] fields = line.Split(':');
+
+                        int number_Department = int.Parse(fields[0]);
+                        string list_NumberProject = fields[1];
+                        string[] fields_NumberProject = list_NumberProject.Split(',');
+
+                        Department d = null;
+                        List<Project> Projects = new List<Project>();
+                        Project p = null;
+
+                        // Tìm Department với DNumber = number_Department
+                        // Điều kiện: phải có sẵn dữ liệu Department trong database mới tìm được
+                        Department department = new Department(number_Department, null, null);
+                        IObjectSet result_Department = DB.QueryByExample(department);
+                        if (result_Department.Count != 0)
+                        {
+                            d = (Department)result_Department[0];
+                        }
+
+                        for(int j = 0; j < fields_NumberProject.Length; ++j)
+                        {
+                            int number_Project = int.Parse(fields_NumberProject[j]);
+                            Project project = new Project(number_Project, null, null);
+                            IObjectSet result_Project = DB.QueryByExample(project);
+                            if (result_Project.Count != 0 && d != null)
+                            {
+                                p = (Project)result_Project[0];
+                                Projects.Add(p);
+                                p.ControlledBy = d;
+                                DB.Store(p);
+                            }
+                        }
+
+                        if(Projects != null && d != null)
+                        {
+                            d.Projects = Projects;
+                            DB.Store(d);
+                        }
+                    }
+                }
+                fin.Close();
+                fs.Close();
+            }
+        }
+        public static void SetWorksFor(string fileName)
+        {
+            // Đọc dữ liệu từ file .txt
+            if (File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); 
+
+                for (int i = 0; i < n; ++i)
+                {
+                    string line = fin.ReadLine();
+
+                    if (line != null)
+                    {
+                        string[] fields = line.Split(':');
+
+                        int number_Department = int.Parse(fields[0]);
+                        string list_SsnEmployee = fields[1];
+                        string[] fields_SsnEmployee = list_SsnEmployee.Split(',');
+
+                        Department d = null;
+                        List<Employee> Employees = new List<Employee>();
+                        Employee p = null;
+
+                        // Tìm Department với DNumber = number_Department
+                        // Điều kiện: phải có sẵn dữ liệu Department trong database mới tìm được
+                        Department department = new Department(number_Department, null, null);
+                        IObjectSet result_Department = DB.QueryByExample(department);
+                        if (result_Department.Count != 0)
+                        {
+                            d = (Department)result_Department[0];
+                        }
+
+                        for (int j = 0; j < fields_SsnEmployee.Length; ++j)
+                        {
+                            int number_Employee = int.Parse(fields_SsnEmployee[j]);
+                            Employee employee = new Employee(number_Employee, null, null, null, null, null, 0, null);
+                            IObjectSet result_Employee = DB.QueryByExample(employee);
+                            if (result_Employee.Count != 0 && d != null)
+                            {
+                                p = (Employee)result_Employee[0];
+                                Employees.Add(p);
+                                p.WorksFor = d;
+                                DB.Store(p);
+                            }
+                        }
+
+                        if (Employees != null && d != null)
+                        {
+                            d.Employees = Employees;
+                            DB.Store(d);
+                        }
+                    }
+                }
+                fin.Close();
+                fs.Close();
+            }
+        }
+        public static void SetSupervisors(string fileName)
+        {
+            // Đọc dữ liệu từ file .txt
+            if (File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine());
+
+                for (int i = 0; i < n; ++i)
+                {
+                    string line = fin.ReadLine();
+
+                    if (line != null)
+                    {
+                        string[] fields = line.Split(':');
+
+                        int ssn_Supervisor = int.Parse(fields[0]);
+                        string list_SsnSupervisees = fields[1];
+                        string[] fields_SsnSupervisees = list_SsnSupervisees.Split(',');
+
+                        Employee e_Supervisor = null;
+                        List<Employee> Supervisees = new List<Employee>();
+                        Employee e_Supervisees = null;
+
+                        Employee supervisor = new Employee(ssn_Supervisor, null, null, null, null, null, 0, null);
+                        IObjectSet result_Supervisor = DB.QueryByExample(supervisor);
+                        if (result_Supervisor.Count != 0)
+                        {
+                            e_Supervisor = (Employee)result_Supervisor[0];
+                        }
+
+                        for (int j = 0; j < fields_SsnSupervisees.Length; ++j)
+                        {
+                            int ssn_Supervisees = int.Parse(fields_SsnSupervisees[j]);
+                            Employee supervisees = new Employee(ssn_Supervisees, null, null, null, null, null, 0, null);
+                            IObjectSet result_Supervisees = DB.QueryByExample(supervisees);
+                            if (result_Supervisees.Count != 0 && e_Supervisor != null)
+                            {
+                                e_Supervisees = (Employee)result_Supervisees[0];
+                                Supervisees.Add(e_Supervisees);
+                                e_Supervisees.Supervisor = e_Supervisor;
+                                DB.Store(e_Supervisees);
+                            }
+                        }
+
+                        if (Supervisees != null && e_Supervisor != null)
+                        {
+                            e_Supervisor.Supervisees = Supervisees;
+                            DB.Store(e_Supervisor);
+                        }
+                    }
+                }
+                fin.Close();
+                fs.Close();
+            }
         }
     }
 }
