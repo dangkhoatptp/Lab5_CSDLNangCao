@@ -53,29 +53,41 @@ namespace Lab_5
             this.label_Ssn = new System.Windows.Forms.Label();
             this.dataGridView_Employee = new System.Windows.Forms.DataGridView();
             this.tabPage_Dependent = new System.Windows.Forms.TabPage();
+            this.label_DependentOf = new System.Windows.Forms.Label();
+            this.button_DeleteDependent = new System.Windows.Forms.Button();
+            this.button_ModifyDependent = new System.Windows.Forms.Button();
+            this.button_AddDependent = new System.Windows.Forms.Button();
+            this.textBox_Relationship = new System.Windows.Forms.TextBox();
+            this.textBox_BirthDateDependent = new System.Windows.Forms.TextBox();
+            this.textBox_GenderDepenednt = new System.Windows.Forms.TextBox();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
             this.label_Relationship = new System.Windows.Forms.Label();
             this.label_BirthDateDependent = new System.Windows.Forms.Label();
             this.label_GenderDependent = new System.Windows.Forms.Label();
             this.label_Name = new System.Windows.Forms.Label();
             this.dataGridView_Dependent = new System.Windows.Forms.DataGridView();
-            this.textBox_Name = new System.Windows.Forms.TextBox();
-            this.textBox_GenderDepenednt = new System.Windows.Forms.TextBox();
-            this.textBox_BirthDateDependent = new System.Windows.Forms.TextBox();
-            this.textBox_Relationship = new System.Windows.Forms.TextBox();
-            this.button_AddDependent = new System.Windows.Forms.Button();
-            this.button_ModifyDependent = new System.Windows.Forms.Button();
-            this.button_DeleteDependent = new System.Windows.Forms.Button();
+            this.name_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.birthdate_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.relationship_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dependentof_Denpedent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Project = new System.Windows.Forms.TabPage();
-            this.dataGridView_Project = new System.Windows.Forms.DataGridView();
-            this.label_PNumber = new System.Windows.Forms.Label();
-            this.label_PName = new System.Windows.Forms.Label();
-            this.label_Location = new System.Windows.Forms.Label();
-            this.textBox_PNumberProject = new System.Windows.Forms.TextBox();
-            this.textBox_PNameProject = new System.Windows.Forms.TextBox();
-            this.textBox_LocationProject = new System.Windows.Forms.TextBox();
-            this.button_AddProject = new System.Windows.Forms.Button();
-            this.button_ModifyProject = new System.Windows.Forms.Button();
             this.button_DeleteProject = new System.Windows.Forms.Button();
+            this.button_ModifyProject = new System.Windows.Forms.Button();
+            this.button_AddProject = new System.Windows.Forms.Button();
+            this.textBox_LocationProject = new System.Windows.Forms.TextBox();
+            this.textBox_PNameProject = new System.Windows.Forms.TextBox();
+            this.textBox_PNumberProject = new System.Windows.Forms.TextBox();
+            this.label_Location = new System.Windows.Forms.Label();
+            this.label_PName = new System.Windows.Forms.Label();
+            this.label_PNumber = new System.Windows.Forms.Label();
+            this.dataGridView_Project = new System.Windows.Forms.DataGridView();
+            this.textBox_DependentOf = new System.Windows.Forms.TextBox();
+            this.number_Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name_Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.location_Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.controlledby_Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.workson_Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage_Employee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Employee)).BeginInit();
@@ -302,6 +314,8 @@ namespace Lab_5
             // 
             // tabPage_Dependent
             // 
+            this.tabPage_Dependent.Controls.Add(this.textBox_DependentOf);
+            this.tabPage_Dependent.Controls.Add(this.label_DependentOf);
             this.tabPage_Dependent.Controls.Add(this.button_DeleteDependent);
             this.tabPage_Dependent.Controls.Add(this.button_ModifyDependent);
             this.tabPage_Dependent.Controls.Add(this.button_AddDependent);
@@ -321,6 +335,77 @@ namespace Lab_5
             this.tabPage_Dependent.TabIndex = 1;
             this.tabPage_Dependent.Text = "Dependent";
             this.tabPage_Dependent.UseVisualStyleBackColor = true;
+            // 
+            // label_DependentOf
+            // 
+            this.label_DependentOf.AutoSize = true;
+            this.label_DependentOf.Location = new System.Drawing.Point(8, 183);
+            this.label_DependentOf.Name = "label_DependentOf";
+            this.label_DependentOf.Size = new System.Drawing.Size(71, 13);
+            this.label_DependentOf.TabIndex = 12;
+            this.label_DependentOf.Text = "DependentOf";
+            // 
+            // button_DeleteDependent
+            // 
+            this.button_DeleteDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_DeleteDependent.Location = new System.Drawing.Point(8, 318);
+            this.button_DeleteDependent.Name = "button_DeleteDependent";
+            this.button_DeleteDependent.Size = new System.Drawing.Size(194, 32);
+            this.button_DeleteDependent.TabIndex = 11;
+            this.button_DeleteDependent.Text = "Delete Dependent";
+            this.button_DeleteDependent.UseVisualStyleBackColor = true;
+            // 
+            // button_ModifyDependent
+            // 
+            this.button_ModifyDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_ModifyDependent.Location = new System.Drawing.Point(8, 280);
+            this.button_ModifyDependent.Name = "button_ModifyDependent";
+            this.button_ModifyDependent.Size = new System.Drawing.Size(194, 32);
+            this.button_ModifyDependent.TabIndex = 10;
+            this.button_ModifyDependent.Text = "Modify Dependent";
+            this.button_ModifyDependent.UseVisualStyleBackColor = true;
+            // 
+            // button_AddDependent
+            // 
+            this.button_AddDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_AddDependent.Location = new System.Drawing.Point(8, 242);
+            this.button_AddDependent.Name = "button_AddDependent";
+            this.button_AddDependent.Size = new System.Drawing.Size(194, 32);
+            this.button_AddDependent.TabIndex = 9;
+            this.button_AddDependent.Text = "Add Dependent";
+            this.button_AddDependent.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Relationship
+            // 
+            this.textBox_Relationship.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Relationship.Location = new System.Drawing.Point(8, 154);
+            this.textBox_Relationship.Name = "textBox_Relationship";
+            this.textBox_Relationship.Size = new System.Drawing.Size(221, 26);
+            this.textBox_Relationship.TabIndex = 8;
+            // 
+            // textBox_BirthDateDependent
+            // 
+            this.textBox_BirthDateDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_BirthDateDependent.Location = new System.Drawing.Point(8, 109);
+            this.textBox_BirthDateDependent.Name = "textBox_BirthDateDependent";
+            this.textBox_BirthDateDependent.Size = new System.Drawing.Size(221, 26);
+            this.textBox_BirthDateDependent.TabIndex = 7;
+            // 
+            // textBox_GenderDepenednt
+            // 
+            this.textBox_GenderDepenednt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_GenderDepenednt.Location = new System.Drawing.Point(8, 64);
+            this.textBox_GenderDepenednt.Name = "textBox_GenderDepenednt";
+            this.textBox_GenderDepenednt.Size = new System.Drawing.Size(123, 26);
+            this.textBox_GenderDepenednt.TabIndex = 6;
+            // 
+            // textBox_Name
+            // 
+            this.textBox_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Name.Location = new System.Drawing.Point(8, 19);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(221, 26);
+            this.textBox_Name.TabIndex = 5;
             // 
             // label_Relationship
             // 
@@ -361,72 +446,51 @@ namespace Lab_5
             // dataGridView_Dependent
             // 
             this.dataGridView_Dependent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Dependent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name_Dependent,
+            this.gender_Dependent,
+            this.birthdate_Dependent,
+            this.relationship_Dependent,
+            this.dependentof_Denpedent});
             this.dataGridView_Dependent.Location = new System.Drawing.Point(263, 0);
             this.dataGridView_Dependent.Name = "dataGridView_Dependent";
             this.dataGridView_Dependent.Size = new System.Drawing.Size(533, 534);
             this.dataGridView_Dependent.TabIndex = 0;
             // 
-            // textBox_Name
+            // name_Dependent
             // 
-            this.textBox_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Name.Location = new System.Drawing.Point(8, 19);
-            this.textBox_Name.Name = "textBox_Name";
-            this.textBox_Name.Size = new System.Drawing.Size(221, 26);
-            this.textBox_Name.TabIndex = 5;
+            this.name_Dependent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name_Dependent.DataPropertyName = "Name";
+            this.name_Dependent.HeaderText = "Name";
+            this.name_Dependent.Name = "name_Dependent";
             // 
-            // textBox_GenderDepenednt
+            // gender_Dependent
             // 
-            this.textBox_GenderDepenednt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_GenderDepenednt.Location = new System.Drawing.Point(8, 64);
-            this.textBox_GenderDepenednt.Name = "textBox_GenderDepenednt";
-            this.textBox_GenderDepenednt.Size = new System.Drawing.Size(123, 26);
-            this.textBox_GenderDepenednt.TabIndex = 6;
+            this.gender_Dependent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.gender_Dependent.DataPropertyName = "Gender";
+            this.gender_Dependent.HeaderText = "Gender";
+            this.gender_Dependent.Name = "gender_Dependent";
             // 
-            // textBox_BirthDateDependent
+            // birthdate_Dependent
             // 
-            this.textBox_BirthDateDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_BirthDateDependent.Location = new System.Drawing.Point(8, 109);
-            this.textBox_BirthDateDependent.Name = "textBox_BirthDateDependent";
-            this.textBox_BirthDateDependent.Size = new System.Drawing.Size(221, 26);
-            this.textBox_BirthDateDependent.TabIndex = 7;
+            this.birthdate_Dependent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.birthdate_Dependent.DataPropertyName = "BirthDate";
+            this.birthdate_Dependent.HeaderText = "BirthDate";
+            this.birthdate_Dependent.Name = "birthdate_Dependent";
             // 
-            // textBox_Relationship
+            // relationship_Dependent
             // 
-            this.textBox_Relationship.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Relationship.Location = new System.Drawing.Point(8, 154);
-            this.textBox_Relationship.Name = "textBox_Relationship";
-            this.textBox_Relationship.Size = new System.Drawing.Size(221, 26);
-            this.textBox_Relationship.TabIndex = 8;
+            this.relationship_Dependent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.relationship_Dependent.DataPropertyName = "Relationship";
+            this.relationship_Dependent.HeaderText = "Relationship";
+            this.relationship_Dependent.Name = "relationship_Dependent";
             // 
-            // button_AddDependent
+            // dependentof_Denpedent
             // 
-            this.button_AddDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_AddDependent.Location = new System.Drawing.Point(8, 205);
-            this.button_AddDependent.Name = "button_AddDependent";
-            this.button_AddDependent.Size = new System.Drawing.Size(194, 32);
-            this.button_AddDependent.TabIndex = 9;
-            this.button_AddDependent.Text = "Add Dependent";
-            this.button_AddDependent.UseVisualStyleBackColor = true;
-            // 
-            // button_ModifyDependent
-            // 
-            this.button_ModifyDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_ModifyDependent.Location = new System.Drawing.Point(8, 243);
-            this.button_ModifyDependent.Name = "button_ModifyDependent";
-            this.button_ModifyDependent.Size = new System.Drawing.Size(194, 32);
-            this.button_ModifyDependent.TabIndex = 10;
-            this.button_ModifyDependent.Text = "Modify Dependent";
-            this.button_ModifyDependent.UseVisualStyleBackColor = true;
-            // 
-            // button_DeleteDependent
-            // 
-            this.button_DeleteDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_DeleteDependent.Location = new System.Drawing.Point(8, 281);
-            this.button_DeleteDependent.Name = "button_DeleteDependent";
-            this.button_DeleteDependent.Size = new System.Drawing.Size(194, 32);
-            this.button_DeleteDependent.TabIndex = 11;
-            this.button_DeleteDependent.Text = "Delete Dependent";
-            this.button_DeleteDependent.UseVisualStyleBackColor = true;
+            this.dependentof_Denpedent.DataPropertyName = "DependentOf";
+            this.dependentof_Denpedent.HeaderText = "DepedentOf";
+            this.dependentof_Denpedent.Name = "dependentof_Denpedent";
+            this.dependentof_Denpedent.Visible = false;
             // 
             // tabPage_Project
             // 
@@ -447,74 +511,15 @@ namespace Lab_5
             this.tabPage_Project.Text = "Project";
             this.tabPage_Project.UseVisualStyleBackColor = true;
             // 
-            // dataGridView_Project
+            // button_DeleteProject
             // 
-            this.dataGridView_Project.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Project.Location = new System.Drawing.Point(292, 0);
-            this.dataGridView_Project.Name = "dataGridView_Project";
-            this.dataGridView_Project.Size = new System.Drawing.Size(504, 534);
-            this.dataGridView_Project.TabIndex = 0;
-            // 
-            // label_PNumber
-            // 
-            this.label_PNumber.AutoSize = true;
-            this.label_PNumber.Location = new System.Drawing.Point(8, 9);
-            this.label_PNumber.Name = "label_PNumber";
-            this.label_PNumber.Size = new System.Drawing.Size(44, 13);
-            this.label_PNumber.TabIndex = 1;
-            this.label_PNumber.Text = "Number";
-            // 
-            // label_PName
-            // 
-            this.label_PName.AutoSize = true;
-            this.label_PName.Location = new System.Drawing.Point(8, 54);
-            this.label_PName.Name = "label_PName";
-            this.label_PName.Size = new System.Drawing.Size(35, 13);
-            this.label_PName.TabIndex = 2;
-            this.label_PName.Text = "Name";
-            // 
-            // label_Location
-            // 
-            this.label_Location.AutoSize = true;
-            this.label_Location.Location = new System.Drawing.Point(8, 99);
-            this.label_Location.Name = "label_Location";
-            this.label_Location.Size = new System.Drawing.Size(48, 13);
-            this.label_Location.TabIndex = 3;
-            this.label_Location.Text = "Location";
-            // 
-            // textBox_PNumberProject
-            // 
-            this.textBox_PNumberProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_PNumberProject.Location = new System.Drawing.Point(8, 25);
-            this.textBox_PNumberProject.Name = "textBox_PNumberProject";
-            this.textBox_PNumberProject.Size = new System.Drawing.Size(111, 26);
-            this.textBox_PNumberProject.TabIndex = 4;
-            // 
-            // textBox_PNameProject
-            // 
-            this.textBox_PNameProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_PNameProject.Location = new System.Drawing.Point(8, 70);
-            this.textBox_PNameProject.Name = "textBox_PNameProject";
-            this.textBox_PNameProject.Size = new System.Drawing.Size(235, 26);
-            this.textBox_PNameProject.TabIndex = 5;
-            // 
-            // textBox_LocationProject
-            // 
-            this.textBox_LocationProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_LocationProject.Location = new System.Drawing.Point(8, 115);
-            this.textBox_LocationProject.Name = "textBox_LocationProject";
-            this.textBox_LocationProject.Size = new System.Drawing.Size(235, 26);
-            this.textBox_LocationProject.TabIndex = 6;
-            // 
-            // button_AddProject
-            // 
-            this.button_AddProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_AddProject.Location = new System.Drawing.Point(8, 160);
-            this.button_AddProject.Name = "button_AddProject";
-            this.button_AddProject.Size = new System.Drawing.Size(198, 36);
-            this.button_AddProject.TabIndex = 7;
-            this.button_AddProject.Text = "Add Project";
-            this.button_AddProject.UseVisualStyleBackColor = true;
+            this.button_DeleteProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_DeleteProject.Location = new System.Drawing.Point(8, 244);
+            this.button_DeleteProject.Name = "button_DeleteProject";
+            this.button_DeleteProject.Size = new System.Drawing.Size(198, 36);
+            this.button_DeleteProject.TabIndex = 9;
+            this.button_DeleteProject.Text = "Delete Project";
+            this.button_DeleteProject.UseVisualStyleBackColor = true;
             // 
             // button_ModifyProject
             // 
@@ -526,15 +531,123 @@ namespace Lab_5
             this.button_ModifyProject.Text = "Modify Project";
             this.button_ModifyProject.UseVisualStyleBackColor = true;
             // 
-            // button_DeleteProject
+            // button_AddProject
             // 
-            this.button_DeleteProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_DeleteProject.Location = new System.Drawing.Point(8, 244);
-            this.button_DeleteProject.Name = "button_DeleteProject";
-            this.button_DeleteProject.Size = new System.Drawing.Size(198, 36);
-            this.button_DeleteProject.TabIndex = 9;
-            this.button_DeleteProject.Text = "Delete Project";
-            this.button_DeleteProject.UseVisualStyleBackColor = true;
+            this.button_AddProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_AddProject.Location = new System.Drawing.Point(8, 160);
+            this.button_AddProject.Name = "button_AddProject";
+            this.button_AddProject.Size = new System.Drawing.Size(198, 36);
+            this.button_AddProject.TabIndex = 7;
+            this.button_AddProject.Text = "Add Project";
+            this.button_AddProject.UseVisualStyleBackColor = true;
+            // 
+            // textBox_LocationProject
+            // 
+            this.textBox_LocationProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_LocationProject.Location = new System.Drawing.Point(8, 115);
+            this.textBox_LocationProject.Name = "textBox_LocationProject";
+            this.textBox_LocationProject.Size = new System.Drawing.Size(235, 26);
+            this.textBox_LocationProject.TabIndex = 6;
+            // 
+            // textBox_PNameProject
+            // 
+            this.textBox_PNameProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_PNameProject.Location = new System.Drawing.Point(8, 70);
+            this.textBox_PNameProject.Name = "textBox_PNameProject";
+            this.textBox_PNameProject.Size = new System.Drawing.Size(235, 26);
+            this.textBox_PNameProject.TabIndex = 5;
+            // 
+            // textBox_PNumberProject
+            // 
+            this.textBox_PNumberProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_PNumberProject.Location = new System.Drawing.Point(8, 25);
+            this.textBox_PNumberProject.Name = "textBox_PNumberProject";
+            this.textBox_PNumberProject.Size = new System.Drawing.Size(111, 26);
+            this.textBox_PNumberProject.TabIndex = 4;
+            // 
+            // label_Location
+            // 
+            this.label_Location.AutoSize = true;
+            this.label_Location.Location = new System.Drawing.Point(8, 99);
+            this.label_Location.Name = "label_Location";
+            this.label_Location.Size = new System.Drawing.Size(48, 13);
+            this.label_Location.TabIndex = 3;
+            this.label_Location.Text = "Location";
+            // 
+            // label_PName
+            // 
+            this.label_PName.AutoSize = true;
+            this.label_PName.Location = new System.Drawing.Point(8, 54);
+            this.label_PName.Name = "label_PName";
+            this.label_PName.Size = new System.Drawing.Size(35, 13);
+            this.label_PName.TabIndex = 2;
+            this.label_PName.Text = "Name";
+            // 
+            // label_PNumber
+            // 
+            this.label_PNumber.AutoSize = true;
+            this.label_PNumber.Location = new System.Drawing.Point(8, 9);
+            this.label_PNumber.Name = "label_PNumber";
+            this.label_PNumber.Size = new System.Drawing.Size(44, 13);
+            this.label_PNumber.TabIndex = 1;
+            this.label_PNumber.Text = "Number";
+            // 
+            // dataGridView_Project
+            // 
+            this.dataGridView_Project.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Project.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.number_Project,
+            this.name_Project,
+            this.location_Project,
+            this.controlledby_Project,
+            this.workson_Project});
+            this.dataGridView_Project.Location = new System.Drawing.Point(292, 0);
+            this.dataGridView_Project.Name = "dataGridView_Project";
+            this.dataGridView_Project.Size = new System.Drawing.Size(504, 534);
+            this.dataGridView_Project.TabIndex = 0;
+            // 
+            // textBox_DependentOf
+            // 
+            this.textBox_DependentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_DependentOf.Location = new System.Drawing.Point(8, 199);
+            this.textBox_DependentOf.Name = "textBox_DependentOf";
+            this.textBox_DependentOf.Size = new System.Drawing.Size(221, 26);
+            this.textBox_DependentOf.TabIndex = 13;
+            // 
+            // number_Project
+            // 
+            this.number_Project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.number_Project.DataPropertyName = "PNumber";
+            this.number_Project.HeaderText = "Number";
+            this.number_Project.Name = "number_Project";
+            // 
+            // name_Project
+            // 
+            this.name_Project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name_Project.DataPropertyName = "PName";
+            this.name_Project.HeaderText = "Name";
+            this.name_Project.Name = "name_Project";
+            // 
+            // location_Project
+            // 
+            this.location_Project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.location_Project.DataPropertyName = "Location";
+            this.location_Project.HeaderText = "Location";
+            this.location_Project.Name = "location_Project";
+            // 
+            // controlledby_Project
+            // 
+            this.controlledby_Project.DataPropertyName = "ControlledBy";
+            this.controlledby_Project.HeaderText = "ControlledBy";
+            this.controlledby_Project.Name = "controlledby_Project";
+            this.controlledby_Project.Visible = false;
+            // 
+            // workson_Project
+            // 
+            this.workson_Project.DataPropertyName = "WorksOn";
+            this.workson_Project.HeaderText = "WorksOn";
+            this.workson_Project.Name = "workson_Project";
+            this.workson_Project.Visible = false;
             // 
             // Frm_Main
             // 
@@ -609,5 +722,17 @@ namespace Lab_5
         private System.Windows.Forms.Button button_DeleteProject;
         private System.Windows.Forms.Button button_ModifyProject;
         private System.Windows.Forms.Button button_AddProject;
+        private System.Windows.Forms.Label label_DependentOf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name_Dependent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gender_Dependent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn birthdate_Dependent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn relationship_Dependent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dependentof_Denpedent;
+        private System.Windows.Forms.TextBox textBox_DependentOf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number_Project;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name_Project;
+        private System.Windows.Forms.DataGridViewTextBoxColumn location_Project;
+        private System.Windows.Forms.DataGridViewTextBoxColumn controlledby_Project;
+        private System.Windows.Forms.DataGridViewTextBoxColumn workson_Project;
     }
 }

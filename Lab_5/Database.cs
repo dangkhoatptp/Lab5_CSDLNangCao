@@ -10,25 +10,27 @@ namespace Lab_5
 {
     public class Database
     {
-        public static string DbFileName { get; set; }
+        public static string DbFileName { get; set; } // Tên file database
         public static IObjectContainer DB;
         public void CloseDatabase()
         {
             DB.Close();
-        }
+        } // Đóng database
         public Database()
         {
             DbFileName = "database.yap";
         }
         public void CreateDatabase()
         {
-            DB = Db4oEmbedded.OpenFile(DbFileName);
+            DB = Db4oEmbedded.OpenFile(DbFileName); // Mở file database
+            // Đọc dữ liệu từ file .txt sau đó nạp vào database
+            CreateEmployee("data_Employee.txt"); 
             CreateDependents("data_Dependent.txt");
-            CreateEmployee("data_Employee.txt");
             CreateProject("data_Project.txt");
         }
         public static void CreateDependents(string fileName)
         {
+            // Lấy dữ liệu Dependent cũ và xóa đi
             IObjectSet result = null;
             Dependent dependent = new Dependent(null, null, null, null);
             result = DB.QueryByExample(dependent);
@@ -39,11 +41,12 @@ namespace Lab_5
                 DB.Delete(result[i]);
             }
 
+            // Đọc dữ liệu từ file .txt
             if(File.Exists(fileName))
             {
-                FileStream fs = new FileStream(fileName, FileMode.Open);
-                StreamReader fin = new StreamReader(fs);
-                int n = int.Parse(fin.ReadLine());
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); // Đọc dòng đầu để lấy số lượng Dependent
 
                 for(int i = 0; i < n; ++i)
                 {
@@ -51,6 +54,7 @@ namespace Lab_5
                     if(line != null)
                     {
                         string[] fields = line.Split(',');
+                        int ssn_Employee = int.Parse(fields[0]);
                         string name = fields[1];
                         string gender = fields[2];
                         string birthdate = fields[3];
@@ -64,6 +68,15 @@ namespace Lab_5
                             Relationship = relationship,
                         };
 
+                        // Tìm Employee với Ssn = ssn_Employee
+                        // Điều kiện: trong database phải có sẵn dữ liệu Employee thì mới tìm được
+                        Employee e = new Employee(ssn_Employee, null, null, null, null, null, 0, null);
+                        IObjectSet result_Employee = DB.QueryByExample(e);
+                        if(result_Employee.Count != 0)
+                        {
+                            d.DependentOf = (Employee)result_Employee[0];
+                        }
+
                         DB.Store(d);
                     }
                 }
@@ -73,6 +86,7 @@ namespace Lab_5
         }
         public static void CreateEmployee(string fileName)
         {
+            // Lấy dữ liệu Employee cũ và xóa đi
             IObjectSet result = null;
             Employee employee = new Employee(0, null, null, null, null, null, 0, null);
             result = DB.QueryByExample(employee);
@@ -83,13 +97,14 @@ namespace Lab_5
                 DB.Delete(result[i]);
             }
 
-            if(File.Exists(fileName))
+            // Đọc dữ liệu từ file .txt
+            if (File.Exists(fileName))
             {
-                FileStream fs = new FileStream(fileName, FileMode.Open);
-                StreamReader fin = new StreamReader(fs);
-                int n = int.Parse(fin.ReadLine());
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); // Đọc dòng đầu để lấy số lượng Employee
 
-                for(int i = 0; i < n; ++i)
+                for (int i = 0; i < n; ++i)
                 {
                     string line = fin.ReadLine();
 
@@ -128,6 +143,7 @@ namespace Lab_5
         }
         public static void CreateProject(string fileName)
         {
+            // Lấy dữ liệu Project cũ và xóa đi
             IObjectSet result = null;
             Project project = new Project(0, null, null);
             result = DB.QueryByExample(project);
@@ -138,11 +154,12 @@ namespace Lab_5
                 DB.Delete(result[i]);
             }
 
+            // Đọc dữ liệu từ file .txt
             if (File.Exists(fileName))
             {
-                FileStream fs = new FileStream(fileName, FileMode.Open);
-                StreamReader fin = new StreamReader(fs);
-                int n = int.Parse(fin.ReadLine());
+                FileStream fs = new FileStream(fileName, FileMode.Open); // Mở file
+                StreamReader fin = new StreamReader(fs); // Tạo biến đọc file
+                int n = int.Parse(fin.ReadLine()); // Đọc dòng đầu để lấy số lượng Project 
 
                 for (int i = 0; i < n; ++i)
                 {
