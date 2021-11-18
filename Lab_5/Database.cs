@@ -10,8 +10,8 @@ namespace Lab_5
 {
     public class Database
     {
-        public static string DbFileName { get; set; } // Tên file database
-        public static IObjectContainer DB;
+        public string DbFileName { get; set; } // Tên file database
+        public IObjectContainer DB;
         public void CloseDatabase()
         {
             DB.Close();
@@ -19,10 +19,10 @@ namespace Lab_5
         public Database()
         {
             DbFileName = "database.yap";
+            DB = Db4oEmbedded.OpenFile(DbFileName); // Mở file database
         }
         public void CreateDatabase()
         {
-            DB = Db4oEmbedded.OpenFile(DbFileName); // Mở file database
             // Đọc dữ liệu từ file .txt sau đó nạp vào database
             CreateEmployee("data_Employee.txt"); 
             CreateDependents("data_Dependent.txt");
@@ -34,7 +34,7 @@ namespace Lab_5
             SetWorksFor("SetWorksFor.txt");
             SetSupervisors("SetSupervisors.txt");
         }
-        public static void CreateDependents(string fileName)
+        public void CreateDependents(string fileName)
         {
             // Lấy dữ liệu Dependent cũ và xóa đi
             IObjectSet result = null;
@@ -101,7 +101,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void CreateEmployee(string fileName)
+        public void CreateEmployee(string fileName)
         {
             // Lấy dữ liệu Employee cũ và xóa đi
             IObjectSet result = null;
@@ -158,7 +158,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void CreateProject(string fileName)
+        public void CreateProject(string fileName)
         {
             // Lấy dữ liệu Project cũ và xóa đi
             IObjectSet result = null;
@@ -205,7 +205,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void CreateDepartment(string fileName)
+        public void CreateDepartment(string fileName)
         {
             // Lấy dữ liệu Department cũ và xóa đi
             IObjectSet result = null;
@@ -258,7 +258,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void CreateWorksOn(string fileName)
+        public void CreateWorksOn(string fileName)
         {
             // Lấy dữ liệu WorksOn cũ và xóa đi
             IObjectSet result = null;
@@ -371,7 +371,7 @@ namespace Lab_5
             IObjectSet result = DB.QueryByExample(w);
             return result;
         }
-        public static void SetManager(string fileName)
+        public void SetManager(string fileName)
         {
             // Đọc dữ liệu từ file .txt
             if (File.Exists(fileName))
@@ -428,7 +428,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void SetControlledBy(string fileName)
+        public void SetControlledBy(string fileName)
         {
             // Đọc dữ liệu từ file .txt
             if (File.Exists(fileName))
@@ -487,7 +487,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void SetWorksFor(string fileName)
+        public void SetWorksFor(string fileName)
         {
             // Đọc dữ liệu từ file .txt
             if (File.Exists(fileName))
@@ -546,7 +546,7 @@ namespace Lab_5
                 fs.Close();
             }
         }
-        public static void SetSupervisors(string fileName)
+        public void SetSupervisors(string fileName)
         {
             // Đọc dữ liệu từ file .txt
             if (File.Exists(fileName))

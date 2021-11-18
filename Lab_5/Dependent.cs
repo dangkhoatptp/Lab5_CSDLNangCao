@@ -14,12 +14,19 @@ namespace Lab_5
         public string BirthDate { get; set; }
         public string Relationship { get; set; }
 
+        // Khởi tạo
         public Dependent (string name = "", string gender = "", string birthdate = "", string relationship = "")
         {
             Name = name;
             Gender = gender;
             BirthDate = birthdate;
             Relationship = relationship;
+        }
+
+        // Phương thức
+        public string _ToString()
+        {
+            return DependentOf.Ssn.ToString() + "," + Name + "," + Gender + "," + BirthDate + "," + Relationship;
         }
 
         // Quan hệ

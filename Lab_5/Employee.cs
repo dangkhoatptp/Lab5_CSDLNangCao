@@ -18,6 +18,7 @@ namespace Lab_5
         public double Salary { get; set; }
         public string Gender { get; set; }
 
+        // Khởi tạo
         public Employee (int ssn = 0, string fname = "", string minit = "", string lname = "", string address = "", string birthdate = "", double salary = 0, string gender = "")
         {
             Ssn = ssn;
@@ -28,6 +29,12 @@ namespace Lab_5
             BirthDate = birthdate;
             Salary = salary;
             Gender = gender;
+        }
+
+        // Phương thức
+        public string _ToString()
+        {
+            return FName + ":" + MInit + ":" + LName + ":" + Ssn.ToString() + ":" + BirthDate + ":" + Address + ":" + Gender + ":" + Salary.ToString();
         }
 
         // Quan hệ
