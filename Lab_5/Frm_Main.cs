@@ -1,13 +1,7 @@
 ﻿using Db4objects.Db4o;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab_5
@@ -63,6 +57,14 @@ namespace Lab_5
             textBox_NameDependentOf.Clear();
             textBox_FNameEmployee.Clear();
             textBox_LNameEmployee.Clear();
+
+            // tab_Project
+            textBox_PNumberProject.ReadOnly = false;
+            textBox_PNumberProject.Clear();
+            textBox_PNameProject.Clear();
+            textBox_LocationProject.Clear();
+            textBox_NumberDepartmentNew.Clear();
+            textBox_NameDepartmentNew.Clear();
 
             // Khởi tạo biến list để lưu dữ liệu Employee
             List<Employee> list_Employee = new List<Employee>();
@@ -129,6 +131,7 @@ namespace Lab_5
             dataGridView_Department.DataSource = list_Department;
             dataGridView_WorksOn.DataSource = list_WorksOn;
             dataGridView_DependentOf_Dependent.DataSource = list_Employee;
+            dataGridView_DepartmentProject.DataSource = list_Department;
         }
 
         private void dataGridView_Employee_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -179,6 +182,29 @@ namespace Lab_5
                 textBox_GenderDependentOld.Text = dependent.Gender;
                 textBox_BirthDateDependentOld.Text = dependent.BirthDate;
                 textBox_RelationshipDependentOld.Text = dependent.Relationship;
+            }
+        }
+        private void dataGridView_DepartmentProject_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            IObjectSet result = database.result_Department();
+            Department department = (Department)result[e.RowIndex];
+            textBox_NumberDepartmentNew.Text = department.DNumber.ToString();
+            textBox_NameDepartmentNew.Text = department.DName;
+        }
+        private void dataGridView_Project_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBox_PNumberProject.ReadOnly = true;
+            IObjectSet result = database.result_Project();
+            if(e.RowIndex != -1)
+            {
+                Project project = (Project)result[e.RowIndex];
+                textBox_PNumberProject.Text = project.PNumber.ToString();
+                textBox_PNameProject.Text = project.PName;
+                textBox_LocationProject.Text = project.Location;
+                textBox_NumberDepartmentNew.Text = project.ControlledBy.DNumber.ToString();
+                textBox_NameDepartmentNew.Text = project.ControlledBy.DName;
+                textBox_NumberDepartmentOld.Text = project.ControlledBy.DNumber.ToString();
+                textBox_NameDepartmentOld.Text = project.ControlledBy.DName;
             }
         }
 
@@ -428,7 +454,6 @@ namespace Lab_5
                 e.Handled = true;
             }
 
-            // Nếu bạn muốn, bạn có thể cho phép nhập số thực với dấu chấm
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -442,7 +467,19 @@ namespace Lab_5
                 e.Handled = true;
             }
 
-            // Nếu bạn muốn, bạn có thể cho phép nhập số thực với dấu chấm
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBox_PNumberProject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Xác thực rằng phím vừa nhấn không phải CTRL hoặc không phải dạng số
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -650,6 +687,318 @@ namespace Lab_5
 
                     LoadData();
                 }
+            }
+        }
+
+        private void button_AddProject_Click(object sender, EventArgs e)
+        {
+            int number_Project = -1;
+            if (textBox_PNumberProject.Text != "") number_Project = int.Parse(textBox_PNumberProject.Text);
+            string name_Project = textBox_PNameProject.Text;
+            string location_Project = textBox_LocationProject.Text;
+            int number_Department = -1;
+            if (textBox_NumberDepartmentNew.Text != "") number_Department = int.Parse(textBox_NumberDepartmentNew.Text);
+            string name_Department = textBox_NameDepartmentNew.Text;
+
+            string thongbao = null;
+
+            if(number_Project == -1)
+            {
+                string thongbaonumberProject = "- Number project\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonumberProject;
+                else thongbao += thongbaonumberProject;
+            }
+            if (name_Project == "")
+            {
+                string thongbaonameProject = "- Name project\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonameProject;
+                else thongbao += thongbaonameProject;
+            }
+            if (location_Project == "")
+            {
+                string thongbaolocationProject = "- Location project\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocationProject;
+                else thongbao += thongbaolocationProject;
+            }
+            if (number_Department == -1)
+            {
+                string thongbaonumberDepartment = "- Number department\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonumberDepartment;
+                else thongbao += thongbaonumberDepartment;
+            }
+            if (name_Department == "")
+            {
+                string thongbaonameDepartment = "- Name department\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonameDepartment;
+                else thongbao += thongbaonameDepartment;
+            }
+
+            if (thongbao != null) MessageBox.Show(thongbao);
+            else
+            {
+                Project project = new Project(number_Project, null, null);
+                IObjectSet result = database.DB.QueryByExample(project);
+                if (result.Count != 0) MessageBox.Show("Number project bị trùng, vui lòng nhập lại");
+                else
+                {
+                    project = new Project(number_Project, name_Project, location_Project);
+                    Department department = new Department(number_Department, name_Department, null);
+                    result = database.DB.QueryByExample(department);
+                    if (result.Count != 0)
+                    {
+                        department = (Department)result[0];
+                        if (department.Projects == null) department.Projects = new List<Project>();
+                        department.Projects.Add(project);
+                        project.ControlledBy = department;
+
+                        database.DB.Store(department);
+                        database.DB.Store(project);
+
+                        result = database.result_Project();
+                        int countNew = result.Count;
+                        string[] data_ProjectNew = new string[countNew + 1];
+
+                        data_ProjectNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Project temp = (Project)result[i];
+                            data_ProjectNew[i + 1] = temp._ToString();
+                        }
+
+                        File.WriteAllLines("data_Project.txt", data_ProjectNew);
+
+                        result = database.result_Department();
+                        int count = 0;
+                        string[] data_Temp = new string[result.Count];
+
+                        for (int i = 0; i < result.Count; ++i)
+                        {
+                            Department temp = (Department)result[i];
+                            if (temp.Projects != null)
+                            {
+                                data_Temp[i] = temp.DNumber.ToString() + ": ";
+                                for (int j = 0; j < temp.Projects.Count; ++j)
+                                {
+                                    if (j == 0)
+                                    {
+                                        data_Temp[i] += temp.Projects[j].PNumber.ToString();
+                                    }
+                                    else
+                                    {
+                                        data_Temp[i] += ", " + temp.Projects[j].PNumber.ToString();
+                                    }
+                                }
+                                ++count;
+                            }
+                        }
+
+                        string[] data_ControlledByNew = new string[count + 1];
+                        data_ControlledByNew[0] = count.ToString();
+                        for (int i = 0; i < data_ControlledByNew.Length - 1; ++i)
+                        {
+                            if(data_Temp[i] != null) data_ControlledByNew[i + 1] = data_Temp[i];
+                        }
+
+                        File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+
+                        MessageBox.Show("Thêm thành công");
+
+                        LoadData();
+                    }
+                }
+
+                
+            }
+        }
+        private void button_DeleteProject_Click(object sender, EventArgs e)
+        {
+            int number_Project = int.Parse(textBox_PNumberProject.Text);
+            int number_Department = int.Parse(textBox_NumberDepartmentOld.Text);
+            string name_Department = textBox_NameDepartmentOld.Text;
+
+            Project project = new Project(number_Project, null, null);
+            IObjectSet result = database.DB.QueryByExample(project);
+            project = (Project)result[0];
+
+            Department department = new Department(number_Department, name_Department, null);
+            result = database.DB.QueryByExample(department);
+            department = (Department)result[0];
+            department.Projects.Remove(project);
+
+            database.DB.Store(department);
+            database.DB.Delete(project);
+
+            result = database.result_Project();
+            int countNew = result.Count;
+            string[] data_ProjectNew = new string[countNew + 1];
+
+            data_ProjectNew[0] = countNew.ToString();
+            for (int i = 0; i < countNew; ++i)
+            {
+                Project temp = (Project)result[i];
+                data_ProjectNew[i + 1] = temp._ToString();
+            }
+
+            File.WriteAllLines("data_Project.txt", data_ProjectNew);
+
+            result = database.result_Department();
+            int count = 0;
+            string[] data_Temp = new string[result.Count];
+
+            for (int i = 0; i < result.Count; ++i)
+            {
+                Department temp = (Department)result[i];
+                if (temp.Projects != null && temp.Projects.Count != 0)
+                {
+                    data_Temp[i] = temp.DNumber.ToString() + ": ";
+                    for (int j = 0; j < temp.Projects.Count; ++j)
+                    {
+                        if (j == 0)
+                        {
+                            data_Temp[i] += temp.Projects[j].PNumber.ToString();
+                        }
+                        else
+                        {
+                            data_Temp[i] += ", " + temp.Projects[j].PNumber.ToString();
+                        }
+                    }
+                    ++count;
+                }
+            }
+
+            string[] data_ControlledByNew = new string[count + 1];
+            data_ControlledByNew[0] = count.ToString();
+            for (int i = 0; i < data_ControlledByNew.Length - 1; ++i)
+            {
+                if (data_Temp[i] != null) data_ControlledByNew[i + 1] = data_Temp[i];
+            }
+
+            File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+
+            MessageBox.Show("Xóa thành công");
+
+            LoadData();
+        }
+        private void button_ModifyProject_Click(object sender, EventArgs e)
+        {
+            int number_Project = int.Parse(textBox_PNumberProject.Text);
+            string name_ProjectNew = textBox_PNameProject.Text;
+            string location_ProjectNew = textBox_LocationProject.Text;
+
+            int number_DepartmentNew = -1;
+            if(textBox_NumberDepartmentNew.Text != "") number_DepartmentNew = int.Parse(textBox_NumberDepartmentNew.Text);
+            string name_DepartmentNew = textBox_NameDepartmentNew.Text;
+
+            int number_DepartmentOld = -1; 
+            if(textBox_NumberDepartmentOld.Text != "") number_DepartmentOld = int.Parse(textBox_NumberDepartmentOld.Text);
+            string name_DepartmentOld = textBox_NameDepartmentOld.Text;
+
+            string thongbao = null;
+
+            if(name_ProjectNew == "")
+            {
+                string thongbaoname = "- Name project\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
+                else thongbao += thongbaoname;
+            }
+            if(location_ProjectNew == "")
+            {
+                string thongbaolocation = "- Location project\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocation;
+                else thongbao += thongbaolocation;
+            }
+
+            if (thongbao != null) MessageBox.Show(thongbao);
+            else
+            {
+                Project project = new Project(number_Project, null, null);
+                IObjectSet result = database.DB.QueryByExample(project);
+                project = (Project)result[0];
+
+                project.PName = name_ProjectNew;
+                project.Location = location_ProjectNew;
+
+                if (number_DepartmentOld == number_DepartmentNew)
+                {
+                    database.DB.Store(project);
+
+                    result = database.result_Project();
+                    int countNew = result.Count;
+                    string[] data_ProjectNew = new string[countNew + 1];
+
+                    data_ProjectNew[0] = countNew.ToString();
+                    for (int i = 0; i < countNew; ++i)
+                    {
+                        Project temp = (Project)result[i];
+                        data_ProjectNew[i + 1] = temp._ToString();
+                    }
+
+                    File.WriteAllLines("data_Project.txt", data_ProjectNew);
+                }
+                else if (number_DepartmentOld != number_DepartmentNew)
+                {
+                    Department departmentOld = new Department(number_DepartmentOld, name_DepartmentOld, null);
+                    result = database.DB.QueryByExample(departmentOld);
+                    departmentOld = (Department)result[0];
+
+                    Department departmentNew = new Department(number_DepartmentNew, name_DepartmentNew, null);
+                    result = database.DB.QueryByExample(departmentNew);
+                    departmentNew = (Department)result[0];
+
+                    departmentOld.Projects.Remove(project);
+                    if (departmentNew.Projects == null) departmentNew.Projects = new List<Project>();
+                    departmentNew.Projects.Add(project);
+                    project.ControlledBy = departmentNew;
+
+                    database.DB.Store(project);
+                    database.DB.Store(departmentOld);
+                    database.DB.Store(departmentNew);
+
+                    result = database.result_Project();
+                    int countNew = result.Count;
+                    string[] data_ProjectNew = new string[countNew + 1];
+
+                    data_ProjectNew[0] = countNew.ToString();
+                    for (int i = 0; i < countNew; ++i)
+                    {
+                        Project temp = (Project)result[i];
+                        data_ProjectNew[i + 1] = temp._ToString();
+                    }
+
+                    File.WriteAllLines("data_Project.txt", data_ProjectNew);
+
+                    result = database.result_Department();
+                    int count = 0;
+                    string[] data_Temp = new string[result.Count];
+
+                    for (int i = 0; i < result.Count; ++i)
+                    {
+                        Department department = (Department)result[i];
+                        if (department.Projects != null && department.Projects.Count != 0)
+                        {
+                            data_Temp[i] = department.DNumber.ToString() + ": ";
+                            for (int j = 0; j < department.Projects.Count; ++j)
+                            {
+                                if (j == 0) data_Temp[i] += department.Projects[j].PNumber.ToString();
+                                else data_Temp[i] += ", " + department.Projects[j].PNumber.ToString();
+                            }
+                            ++count;
+                        }
+                    }
+
+                    string[] data_ControlledByNew = new string[count + 1];
+                    data_ControlledByNew[0] = count.ToString();
+                    for (int i = 0; i < count; ++i)
+                    {
+                        data_ControlledByNew[i + 1] = data_Temp[i];
+                    }
+
+                    File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+                }
+
+                MessageBox.Show("Sửa thành công");
+
+                LoadData();
             }
         }
     }

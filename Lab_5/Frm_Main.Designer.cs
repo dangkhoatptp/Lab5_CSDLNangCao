@@ -69,6 +69,31 @@ namespace Lab_5
             this.supervisor_Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supervisees_Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Dependent = new System.Windows.Forms.TabPage();
+            this.textBox_RelationshipDependentOld = new System.Windows.Forms.TextBox();
+            this.textBox_BirthDateDependentOld = new System.Windows.Forms.TextBox();
+            this.textBox_NameDependentOld = new System.Windows.Forms.TextBox();
+            this.textBox_GenderDependentOld = new System.Windows.Forms.TextBox();
+            this.textBox_LNameEmployee = new System.Windows.Forms.TextBox();
+            this.textBox_FNameEmployee = new System.Windows.Forms.TextBox();
+            this.label_NameDependentOf = new System.Windows.Forms.Label();
+            this.label_SsnDependentOf = new System.Windows.Forms.Label();
+            this.textBox_NameDependentOf = new System.Windows.Forms.TextBox();
+            this.dataGridView_DependentOf_Dependent = new System.Windows.Forms.DataGridView();
+            this.ssn_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FName_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LName_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gender_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minit_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.birthdate_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salary_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.worksfor_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.manager_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.workson_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dependents_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supervisor_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supervisees_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox_RelationshipDependent = new System.Windows.Forms.ComboBox();
             this.button_Reset_Dependent = new System.Windows.Forms.Button();
             this.textBox_SsnDependentOf = new System.Windows.Forms.TextBox();
             this.label_DependentOf = new System.Windows.Forms.Label();
@@ -89,6 +114,21 @@ namespace Lab_5
             this.relationship_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dependentof_Denpedent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Project = new System.Windows.Forms.TabPage();
+            this.textBox_NumberDepartmentOld = new System.Windows.Forms.TextBox();
+            this.textBox_NameDepartmentOld = new System.Windows.Forms.TextBox();
+            this.label_controlledby_DepartmetProject = new System.Windows.Forms.Label();
+            this.label_dnumber_DepartmentProject = new System.Windows.Forms.Label();
+            this.label_dname_DepartmentProject = new System.Windows.Forms.Label();
+            this.textBox_NumberDepartmentNew = new System.Windows.Forms.TextBox();
+            this.textBox_NameDepartmentNew = new System.Windows.Forms.TextBox();
+            this.dataGridView_DepartmentProject = new System.Windows.Forms.DataGridView();
+            this.dnumber_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dname_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locations_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employees_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.manager_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projects_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mgrstardate_DepartmentProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Reset_Project = new System.Windows.Forms.Button();
             this.button_DeleteProject = new System.Windows.Forms.Button();
             this.button_ModifyProject = new System.Windows.Forms.Button();
@@ -129,43 +169,19 @@ namespace Lab_5
             this.hours_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employee_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.project_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox_RelationshipDependent = new System.Windows.Forms.ComboBox();
-            this.dataGridView_DependentOf_Dependent = new System.Windows.Forms.DataGridView();
-            this.textBox_NameDependentOf = new System.Windows.Forms.TextBox();
-            this.label_SsnDependentOf = new System.Windows.Forms.Label();
-            this.label_NameDependentOf = new System.Windows.Forms.Label();
-            this.ssn_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FName_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LName_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gender_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minit_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birthdate_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salary_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.worksfor_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.manager_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workson_Dependent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dependents_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supervisor_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supervisees_DependentOf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox_FNameEmployee = new System.Windows.Forms.TextBox();
-            this.textBox_LNameEmployee = new System.Windows.Forms.TextBox();
-            this.textBox_GenderDependentOld = new System.Windows.Forms.TextBox();
-            this.textBox_NameDependentOld = new System.Windows.Forms.TextBox();
-            this.textBox_BirthDateDependentOld = new System.Windows.Forms.TextBox();
-            this.textBox_RelationshipDependentOld = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage_Employee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Employee)).BeginInit();
             this.tabPage_Dependent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentOf_Dependent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Dependent)).BeginInit();
             this.tabPage_Project.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DepartmentProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Project)).BeginInit();
             this.tabPage_Department.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Department)).BeginInit();
             this.tabPage_WorksOn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_WorksOn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentOf_Dependent)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -553,6 +569,224 @@ namespace Lab_5
             this.tabPage_Dependent.Text = "Dependent";
             this.tabPage_Dependent.UseVisualStyleBackColor = true;
             // 
+            // textBox_RelationshipDependentOld
+            // 
+            this.textBox_RelationshipDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_RelationshipDependentOld.Location = new System.Drawing.Point(8, 407);
+            this.textBox_RelationshipDependentOld.Name = "textBox_RelationshipDependentOld";
+            this.textBox_RelationshipDependentOld.ReadOnly = true;
+            this.textBox_RelationshipDependentOld.Size = new System.Drawing.Size(88, 26);
+            this.textBox_RelationshipDependentOld.TabIndex = 33;
+            this.textBox_RelationshipDependentOld.Visible = false;
+            // 
+            // textBox_BirthDateDependentOld
+            // 
+            this.textBox_BirthDateDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_BirthDateDependentOld.Location = new System.Drawing.Point(8, 375);
+            this.textBox_BirthDateDependentOld.Name = "textBox_BirthDateDependentOld";
+            this.textBox_BirthDateDependentOld.ReadOnly = true;
+            this.textBox_BirthDateDependentOld.Size = new System.Drawing.Size(88, 26);
+            this.textBox_BirthDateDependentOld.TabIndex = 32;
+            this.textBox_BirthDateDependentOld.Visible = false;
+            // 
+            // textBox_NameDependentOld
+            // 
+            this.textBox_NameDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NameDependentOld.Location = new System.Drawing.Point(8, 311);
+            this.textBox_NameDependentOld.Name = "textBox_NameDependentOld";
+            this.textBox_NameDependentOld.ReadOnly = true;
+            this.textBox_NameDependentOld.Size = new System.Drawing.Size(88, 26);
+            this.textBox_NameDependentOld.TabIndex = 31;
+            this.textBox_NameDependentOld.Visible = false;
+            // 
+            // textBox_GenderDependentOld
+            // 
+            this.textBox_GenderDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_GenderDependentOld.Location = new System.Drawing.Point(8, 343);
+            this.textBox_GenderDependentOld.Name = "textBox_GenderDependentOld";
+            this.textBox_GenderDependentOld.ReadOnly = true;
+            this.textBox_GenderDependentOld.Size = new System.Drawing.Size(88, 26);
+            this.textBox_GenderDependentOld.TabIndex = 30;
+            this.textBox_GenderDependentOld.Visible = false;
+            // 
+            // textBox_LNameEmployee
+            // 
+            this.textBox_LNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_LNameEmployee.Location = new System.Drawing.Point(519, 32);
+            this.textBox_LNameEmployee.Name = "textBox_LNameEmployee";
+            this.textBox_LNameEmployee.ReadOnly = true;
+            this.textBox_LNameEmployee.Size = new System.Drawing.Size(100, 26);
+            this.textBox_LNameEmployee.TabIndex = 29;
+            this.textBox_LNameEmployee.Visible = false;
+            // 
+            // textBox_FNameEmployee
+            // 
+            this.textBox_FNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_FNameEmployee.Location = new System.Drawing.Point(413, 32);
+            this.textBox_FNameEmployee.Name = "textBox_FNameEmployee";
+            this.textBox_FNameEmployee.ReadOnly = true;
+            this.textBox_FNameEmployee.Size = new System.Drawing.Size(100, 26);
+            this.textBox_FNameEmployee.TabIndex = 28;
+            this.textBox_FNameEmployee.Visible = false;
+            // 
+            // label_NameDependentOf
+            // 
+            this.label_NameDependentOf.AutoSize = true;
+            this.label_NameDependentOf.Location = new System.Drawing.Point(410, 61);
+            this.label_NameDependentOf.Name = "label_NameDependentOf";
+            this.label_NameDependentOf.Size = new System.Drawing.Size(35, 13);
+            this.label_NameDependentOf.TabIndex = 27;
+            this.label_NameDependentOf.Text = "Name";
+            // 
+            // label_SsnDependentOf
+            // 
+            this.label_SsnDependentOf.AutoSize = true;
+            this.label_SsnDependentOf.Location = new System.Drawing.Point(276, 61);
+            this.label_SsnDependentOf.Name = "label_SsnDependentOf";
+            this.label_SsnDependentOf.Size = new System.Drawing.Size(25, 13);
+            this.label_SsnDependentOf.TabIndex = 26;
+            this.label_SsnDependentOf.Text = "Ssn";
+            // 
+            // textBox_NameDependentOf
+            // 
+            this.textBox_NameDependentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NameDependentOf.Location = new System.Drawing.Point(413, 77);
+            this.textBox_NameDependentOf.Name = "textBox_NameDependentOf";
+            this.textBox_NameDependentOf.ReadOnly = true;
+            this.textBox_NameDependentOf.Size = new System.Drawing.Size(229, 26);
+            this.textBox_NameDependentOf.TabIndex = 25;
+            // 
+            // dataGridView_DependentOf_Dependent
+            // 
+            this.dataGridView_DependentOf_Dependent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_DependentOf_Dependent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ssn_DependentOf,
+            this.FName_DependentOf,
+            this.LName_DependentOf,
+            this.gender_DependentOf,
+            this.minit_DependentOf,
+            this.address_DependentOf,
+            this.birthdate_DependentOf,
+            this.salary_DependentOf,
+            this.worksfor_DependentOf,
+            this.manager_DependentOf,
+            this.workson_Dependent,
+            this.dependents_DependentOf,
+            this.supervisor_DependentOf,
+            this.supervisees_DependentOf});
+            this.dataGridView_DependentOf_Dependent.Location = new System.Drawing.Point(279, 109);
+            this.dataGridView_DependentOf_Dependent.Name = "dataGridView_DependentOf_Dependent";
+            this.dataGridView_DependentOf_Dependent.Size = new System.Drawing.Size(363, 425);
+            this.dataGridView_DependentOf_Dependent.TabIndex = 24;
+            this.dataGridView_DependentOf_Dependent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_DependentOf_Dependent_CellClick);
+            // 
+            // ssn_DependentOf
+            // 
+            this.ssn_DependentOf.DataPropertyName = "Ssn";
+            this.ssn_DependentOf.HeaderText = "Ssn";
+            this.ssn_DependentOf.Name = "ssn_DependentOf";
+            this.ssn_DependentOf.Width = 95;
+            // 
+            // FName_DependentOf
+            // 
+            this.FName_DependentOf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FName_DependentOf.DataPropertyName = "FName";
+            this.FName_DependentOf.HeaderText = "First name";
+            this.FName_DependentOf.Name = "FName_DependentOf";
+            // 
+            // LName_DependentOf
+            // 
+            this.LName_DependentOf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LName_DependentOf.DataPropertyName = "LName";
+            this.LName_DependentOf.HeaderText = "Last name";
+            this.LName_DependentOf.Name = "LName_DependentOf";
+            // 
+            // gender_DependentOf
+            // 
+            this.gender_DependentOf.DataPropertyName = "Gender";
+            this.gender_DependentOf.HeaderText = "Gender";
+            this.gender_DependentOf.Name = "gender_DependentOf";
+            this.gender_DependentOf.Visible = false;
+            // 
+            // minit_DependentOf
+            // 
+            this.minit_DependentOf.DataPropertyName = "MInit";
+            this.minit_DependentOf.HeaderText = "MInit";
+            this.minit_DependentOf.Name = "minit_DependentOf";
+            this.minit_DependentOf.Visible = false;
+            // 
+            // address_DependentOf
+            // 
+            this.address_DependentOf.DataPropertyName = "Address";
+            this.address_DependentOf.HeaderText = "Address";
+            this.address_DependentOf.Name = "address_DependentOf";
+            this.address_DependentOf.Visible = false;
+            // 
+            // birthdate_DependentOf
+            // 
+            this.birthdate_DependentOf.DataPropertyName = "BirthDate";
+            this.birthdate_DependentOf.HeaderText = "BirthDate";
+            this.birthdate_DependentOf.Name = "birthdate_DependentOf";
+            this.birthdate_DependentOf.Visible = false;
+            // 
+            // salary_DependentOf
+            // 
+            this.salary_DependentOf.DataPropertyName = "Salary";
+            this.salary_DependentOf.HeaderText = "Salary";
+            this.salary_DependentOf.Name = "salary_DependentOf";
+            this.salary_DependentOf.Visible = false;
+            // 
+            // worksfor_DependentOf
+            // 
+            this.worksfor_DependentOf.DataPropertyName = "WorksFor";
+            this.worksfor_DependentOf.HeaderText = "WorksFor";
+            this.worksfor_DependentOf.Name = "worksfor_DependentOf";
+            this.worksfor_DependentOf.Visible = false;
+            // 
+            // manager_DependentOf
+            // 
+            this.manager_DependentOf.DataPropertyName = "Manager";
+            this.manager_DependentOf.HeaderText = "Manager";
+            this.manager_DependentOf.Name = "manager_DependentOf";
+            this.manager_DependentOf.Visible = false;
+            // 
+            // workson_Dependent
+            // 
+            this.workson_Dependent.DataPropertyName = "WorksOn";
+            this.workson_Dependent.HeaderText = "WorksOn";
+            this.workson_Dependent.Name = "workson_Dependent";
+            this.workson_Dependent.Visible = false;
+            // 
+            // dependents_DependentOf
+            // 
+            this.dependents_DependentOf.DataPropertyName = "Dependents";
+            this.dependents_DependentOf.HeaderText = "Dependents";
+            this.dependents_DependentOf.Name = "dependents_DependentOf";
+            this.dependents_DependentOf.Visible = false;
+            // 
+            // supervisor_DependentOf
+            // 
+            this.supervisor_DependentOf.DataPropertyName = "Supervisor";
+            this.supervisor_DependentOf.HeaderText = "Supervisor";
+            this.supervisor_DependentOf.Name = "supervisor_DependentOf";
+            this.supervisor_DependentOf.Visible = false;
+            // 
+            // supervisees_DependentOf
+            // 
+            this.supervisees_DependentOf.DataPropertyName = "Supervisees";
+            this.supervisees_DependentOf.HeaderText = "Supervisees";
+            this.supervisees_DependentOf.Name = "supervisees_DependentOf";
+            this.supervisees_DependentOf.Visible = false;
+            // 
+            // comboBox_RelationshipDependent
+            // 
+            this.comboBox_RelationshipDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_RelationshipDependent.FormattingEnabled = true;
+            this.comboBox_RelationshipDependent.Location = new System.Drawing.Point(8, 152);
+            this.comboBox_RelationshipDependent.Name = "comboBox_RelationshipDependent";
+            this.comboBox_RelationshipDependent.Size = new System.Drawing.Size(194, 28);
+            this.comboBox_RelationshipDependent.TabIndex = 23;
+            // 
             // button_Reset_Dependent
             // 
             this.button_Reset_Dependent.Location = new System.Drawing.Point(11, 502);
@@ -725,6 +959,14 @@ namespace Lab_5
             // 
             // tabPage_Project
             // 
+            this.tabPage_Project.Controls.Add(this.textBox_NumberDepartmentOld);
+            this.tabPage_Project.Controls.Add(this.textBox_NameDepartmentOld);
+            this.tabPage_Project.Controls.Add(this.label_controlledby_DepartmetProject);
+            this.tabPage_Project.Controls.Add(this.label_dnumber_DepartmentProject);
+            this.tabPage_Project.Controls.Add(this.label_dname_DepartmentProject);
+            this.tabPage_Project.Controls.Add(this.textBox_NumberDepartmentNew);
+            this.tabPage_Project.Controls.Add(this.textBox_NameDepartmentNew);
+            this.tabPage_Project.Controls.Add(this.dataGridView_DepartmentProject);
             this.tabPage_Project.Controls.Add(this.button_Reset_Project);
             this.tabPage_Project.Controls.Add(this.button_DeleteProject);
             this.tabPage_Project.Controls.Add(this.button_ModifyProject);
@@ -742,6 +984,137 @@ namespace Lab_5
             this.tabPage_Project.TabIndex = 2;
             this.tabPage_Project.Text = "Project";
             this.tabPage_Project.UseVisualStyleBackColor = true;
+            // 
+            // textBox_NumberDepartmentOld
+            // 
+            this.textBox_NumberDepartmentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NumberDepartmentOld.Location = new System.Drawing.Point(435, 17);
+            this.textBox_NumberDepartmentOld.Name = "textBox_NumberDepartmentOld";
+            this.textBox_NumberDepartmentOld.ReadOnly = true;
+            this.textBox_NumberDepartmentOld.Size = new System.Drawing.Size(85, 26);
+            this.textBox_NumberDepartmentOld.TabIndex = 34;
+            this.textBox_NumberDepartmentOld.Visible = false;
+            // 
+            // textBox_NameDepartmentOld
+            // 
+            this.textBox_NameDepartmentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NameDepartmentOld.Location = new System.Drawing.Point(526, 17);
+            this.textBox_NameDepartmentOld.Name = "textBox_NameDepartmentOld";
+            this.textBox_NameDepartmentOld.ReadOnly = true;
+            this.textBox_NameDepartmentOld.Size = new System.Drawing.Size(85, 26);
+            this.textBox_NameDepartmentOld.TabIndex = 33;
+            this.textBox_NameDepartmentOld.Visible = false;
+            // 
+            // label_controlledby_DepartmetProject
+            // 
+            this.label_controlledby_DepartmetProject.AutoSize = true;
+            this.label_controlledby_DepartmetProject.Location = new System.Drawing.Point(360, 25);
+            this.label_controlledby_DepartmetProject.Name = "label_controlledby_DepartmetProject";
+            this.label_controlledby_DepartmetProject.Size = new System.Drawing.Size(69, 13);
+            this.label_controlledby_DepartmetProject.TabIndex = 29;
+            this.label_controlledby_DepartmetProject.Text = "Controlled By";
+            // 
+            // label_dnumber_DepartmentProject
+            // 
+            this.label_dnumber_DepartmentProject.AutoSize = true;
+            this.label_dnumber_DepartmentProject.Location = new System.Drawing.Point(360, 51);
+            this.label_dnumber_DepartmentProject.Name = "label_dnumber_DepartmentProject";
+            this.label_dnumber_DepartmentProject.Size = new System.Drawing.Size(52, 13);
+            this.label_dnumber_DepartmentProject.TabIndex = 28;
+            this.label_dnumber_DepartmentProject.Text = "DNumber";
+            // 
+            // label_dname_DepartmentProject
+            // 
+            this.label_dname_DepartmentProject.AutoSize = true;
+            this.label_dname_DepartmentProject.Location = new System.Drawing.Point(451, 51);
+            this.label_dname_DepartmentProject.Name = "label_dname_DepartmentProject";
+            this.label_dname_DepartmentProject.Size = new System.Drawing.Size(43, 13);
+            this.label_dname_DepartmentProject.TabIndex = 27;
+            this.label_dname_DepartmentProject.Text = "DName";
+            // 
+            // textBox_NumberDepartmentNew
+            // 
+            this.textBox_NumberDepartmentNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NumberDepartmentNew.Location = new System.Drawing.Point(363, 67);
+            this.textBox_NumberDepartmentNew.Name = "textBox_NumberDepartmentNew";
+            this.textBox_NumberDepartmentNew.ReadOnly = true;
+            this.textBox_NumberDepartmentNew.Size = new System.Drawing.Size(85, 26);
+            this.textBox_NumberDepartmentNew.TabIndex = 26;
+            // 
+            // textBox_NameDepartmentNew
+            // 
+            this.textBox_NameDepartmentNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_NameDepartmentNew.Location = new System.Drawing.Point(454, 67);
+            this.textBox_NameDepartmentNew.Name = "textBox_NameDepartmentNew";
+            this.textBox_NameDepartmentNew.ReadOnly = true;
+            this.textBox_NameDepartmentNew.Size = new System.Drawing.Size(151, 26);
+            this.textBox_NameDepartmentNew.TabIndex = 25;
+            // 
+            // dataGridView_DepartmentProject
+            // 
+            this.dataGridView_DepartmentProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_DepartmentProject.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dnumber_DepartmentProject,
+            this.dname_DepartmentProject,
+            this.locations_DepartmentProject,
+            this.employees_DepartmentProject,
+            this.manager_DepartmentProject,
+            this.projects_DepartmentProject,
+            this.mgrstardate_DepartmentProject});
+            this.dataGridView_DepartmentProject.Location = new System.Drawing.Point(363, 99);
+            this.dataGridView_DepartmentProject.Name = "dataGridView_DepartmentProject";
+            this.dataGridView_DepartmentProject.Size = new System.Drawing.Size(276, 435);
+            this.dataGridView_DepartmentProject.TabIndex = 24;
+            this.dataGridView_DepartmentProject.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_DepartmentProject_CellClick);
+            // 
+            // dnumber_DepartmentProject
+            // 
+            this.dnumber_DepartmentProject.DataPropertyName = "DNumber";
+            this.dnumber_DepartmentProject.HeaderText = "DNumber";
+            this.dnumber_DepartmentProject.Name = "dnumber_DepartmentProject";
+            this.dnumber_DepartmentProject.Width = 85;
+            // 
+            // dname_DepartmentProject
+            // 
+            this.dname_DepartmentProject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dname_DepartmentProject.DataPropertyName = "DName";
+            this.dname_DepartmentProject.HeaderText = "DName";
+            this.dname_DepartmentProject.Name = "dname_DepartmentProject";
+            // 
+            // locations_DepartmentProject
+            // 
+            this.locations_DepartmentProject.DataPropertyName = "Locations";
+            this.locations_DepartmentProject.HeaderText = "Locations";
+            this.locations_DepartmentProject.Name = "locations_DepartmentProject";
+            this.locations_DepartmentProject.Visible = false;
+            // 
+            // employees_DepartmentProject
+            // 
+            this.employees_DepartmentProject.DataPropertyName = "Employees";
+            this.employees_DepartmentProject.HeaderText = "Employees";
+            this.employees_DepartmentProject.Name = "employees_DepartmentProject";
+            this.employees_DepartmentProject.Visible = false;
+            // 
+            // manager_DepartmentProject
+            // 
+            this.manager_DepartmentProject.DataPropertyName = "Manager";
+            this.manager_DepartmentProject.HeaderText = "Manager";
+            this.manager_DepartmentProject.Name = "manager_DepartmentProject";
+            this.manager_DepartmentProject.Visible = false;
+            // 
+            // projects_DepartmentProject
+            // 
+            this.projects_DepartmentProject.DataPropertyName = "Projects";
+            this.projects_DepartmentProject.HeaderText = "Projects";
+            this.projects_DepartmentProject.Name = "projects_DepartmentProject";
+            this.projects_DepartmentProject.Visible = false;
+            // 
+            // mgrstardate_DepartmentProject
+            // 
+            this.mgrstardate_DepartmentProject.DataPropertyName = "MgrStartDate";
+            this.mgrstardate_DepartmentProject.HeaderText = "MgrStartDate";
+            this.mgrstardate_DepartmentProject.Name = "mgrstardate_DepartmentProject";
+            this.mgrstardate_DepartmentProject.Visible = false;
             // 
             // button_Reset_Project
             // 
@@ -762,6 +1135,7 @@ namespace Lab_5
             this.button_DeleteProject.TabIndex = 9;
             this.button_DeleteProject.Text = "Delete Project";
             this.button_DeleteProject.UseVisualStyleBackColor = true;
+            this.button_DeleteProject.Click += new System.EventHandler(this.button_DeleteProject_Click);
             // 
             // button_ModifyProject
             // 
@@ -772,6 +1146,7 @@ namespace Lab_5
             this.button_ModifyProject.TabIndex = 8;
             this.button_ModifyProject.Text = "Modify Project";
             this.button_ModifyProject.UseVisualStyleBackColor = true;
+            this.button_ModifyProject.Click += new System.EventHandler(this.button_ModifyProject_Click);
             // 
             // button_AddProject
             // 
@@ -782,6 +1157,7 @@ namespace Lab_5
             this.button_AddProject.TabIndex = 7;
             this.button_AddProject.Text = "Add Project";
             this.button_AddProject.UseVisualStyleBackColor = true;
+            this.button_AddProject.Click += new System.EventHandler(this.button_AddProject_Click);
             // 
             // textBox_LocationProject
             // 
@@ -806,6 +1182,7 @@ namespace Lab_5
             this.textBox_PNumberProject.Name = "textBox_PNumberProject";
             this.textBox_PNumberProject.Size = new System.Drawing.Size(111, 26);
             this.textBox_PNumberProject.TabIndex = 4;
+            this.textBox_PNumberProject.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_PNumberProject_KeyPress);
             // 
             // label_Location
             // 
@@ -843,10 +1220,11 @@ namespace Lab_5
             this.location_Project,
             this.controlledby_Project,
             this.workson_Project});
-            this.dataGridView_Project.Location = new System.Drawing.Point(292, 0);
+            this.dataGridView_Project.Location = new System.Drawing.Point(654, 0);
             this.dataGridView_Project.Name = "dataGridView_Project";
             this.dataGridView_Project.Size = new System.Drawing.Size(504, 534);
             this.dataGridView_Project.TabIndex = 0;
+            this.dataGridView_Project.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Project_CellClick);
             // 
             // number_Project
             // 
@@ -1090,224 +1468,6 @@ namespace Lab_5
             this.project_WorksOn.HeaderText = "Project";
             this.project_WorksOn.Name = "project_WorksOn";
             // 
-            // comboBox_RelationshipDependent
-            // 
-            this.comboBox_RelationshipDependent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_RelationshipDependent.FormattingEnabled = true;
-            this.comboBox_RelationshipDependent.Location = new System.Drawing.Point(8, 152);
-            this.comboBox_RelationshipDependent.Name = "comboBox_RelationshipDependent";
-            this.comboBox_RelationshipDependent.Size = new System.Drawing.Size(194, 28);
-            this.comboBox_RelationshipDependent.TabIndex = 23;
-            // 
-            // dataGridView_DependentOf_Dependent
-            // 
-            this.dataGridView_DependentOf_Dependent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_DependentOf_Dependent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ssn_DependentOf,
-            this.FName_DependentOf,
-            this.LName_DependentOf,
-            this.gender_DependentOf,
-            this.minit_DependentOf,
-            this.address_DependentOf,
-            this.birthdate_DependentOf,
-            this.salary_DependentOf,
-            this.worksfor_DependentOf,
-            this.manager_DependentOf,
-            this.workson_Dependent,
-            this.dependents_DependentOf,
-            this.supervisor_DependentOf,
-            this.supervisees_DependentOf});
-            this.dataGridView_DependentOf_Dependent.Location = new System.Drawing.Point(279, 109);
-            this.dataGridView_DependentOf_Dependent.Name = "dataGridView_DependentOf_Dependent";
-            this.dataGridView_DependentOf_Dependent.Size = new System.Drawing.Size(363, 425);
-            this.dataGridView_DependentOf_Dependent.TabIndex = 24;
-            this.dataGridView_DependentOf_Dependent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_DependentOf_Dependent_CellClick);
-            // 
-            // textBox_NameDependentOf
-            // 
-            this.textBox_NameDependentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_NameDependentOf.Location = new System.Drawing.Point(413, 77);
-            this.textBox_NameDependentOf.Name = "textBox_NameDependentOf";
-            this.textBox_NameDependentOf.ReadOnly = true;
-            this.textBox_NameDependentOf.Size = new System.Drawing.Size(229, 26);
-            this.textBox_NameDependentOf.TabIndex = 25;
-            // 
-            // label_SsnDependentOf
-            // 
-            this.label_SsnDependentOf.AutoSize = true;
-            this.label_SsnDependentOf.Location = new System.Drawing.Point(276, 61);
-            this.label_SsnDependentOf.Name = "label_SsnDependentOf";
-            this.label_SsnDependentOf.Size = new System.Drawing.Size(25, 13);
-            this.label_SsnDependentOf.TabIndex = 26;
-            this.label_SsnDependentOf.Text = "Ssn";
-            // 
-            // label_NameDependentOf
-            // 
-            this.label_NameDependentOf.AutoSize = true;
-            this.label_NameDependentOf.Location = new System.Drawing.Point(410, 61);
-            this.label_NameDependentOf.Name = "label_NameDependentOf";
-            this.label_NameDependentOf.Size = new System.Drawing.Size(35, 13);
-            this.label_NameDependentOf.TabIndex = 27;
-            this.label_NameDependentOf.Text = "Name";
-            // 
-            // ssn_DependentOf
-            // 
-            this.ssn_DependentOf.DataPropertyName = "Ssn";
-            this.ssn_DependentOf.HeaderText = "Ssn";
-            this.ssn_DependentOf.Name = "ssn_DependentOf";
-            this.ssn_DependentOf.Width = 95;
-            // 
-            // FName_DependentOf
-            // 
-            this.FName_DependentOf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FName_DependentOf.DataPropertyName = "FName";
-            this.FName_DependentOf.HeaderText = "First name";
-            this.FName_DependentOf.Name = "FName_DependentOf";
-            // 
-            // LName_DependentOf
-            // 
-            this.LName_DependentOf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LName_DependentOf.DataPropertyName = "LName";
-            this.LName_DependentOf.HeaderText = "Last name";
-            this.LName_DependentOf.Name = "LName_DependentOf";
-            // 
-            // gender_DependentOf
-            // 
-            this.gender_DependentOf.DataPropertyName = "Gender";
-            this.gender_DependentOf.HeaderText = "Gender";
-            this.gender_DependentOf.Name = "gender_DependentOf";
-            this.gender_DependentOf.Visible = false;
-            // 
-            // minit_DependentOf
-            // 
-            this.minit_DependentOf.DataPropertyName = "MInit";
-            this.minit_DependentOf.HeaderText = "MInit";
-            this.minit_DependentOf.Name = "minit_DependentOf";
-            this.minit_DependentOf.Visible = false;
-            // 
-            // address_DependentOf
-            // 
-            this.address_DependentOf.DataPropertyName = "Address";
-            this.address_DependentOf.HeaderText = "Address";
-            this.address_DependentOf.Name = "address_DependentOf";
-            this.address_DependentOf.Visible = false;
-            // 
-            // birthdate_DependentOf
-            // 
-            this.birthdate_DependentOf.DataPropertyName = "BirthDate";
-            this.birthdate_DependentOf.HeaderText = "BirthDate";
-            this.birthdate_DependentOf.Name = "birthdate_DependentOf";
-            this.birthdate_DependentOf.Visible = false;
-            // 
-            // salary_DependentOf
-            // 
-            this.salary_DependentOf.DataPropertyName = "Salary";
-            this.salary_DependentOf.HeaderText = "Salary";
-            this.salary_DependentOf.Name = "salary_DependentOf";
-            this.salary_DependentOf.Visible = false;
-            // 
-            // worksfor_DependentOf
-            // 
-            this.worksfor_DependentOf.DataPropertyName = "WorksFor";
-            this.worksfor_DependentOf.HeaderText = "WorksFor";
-            this.worksfor_DependentOf.Name = "worksfor_DependentOf";
-            this.worksfor_DependentOf.Visible = false;
-            // 
-            // manager_DependentOf
-            // 
-            this.manager_DependentOf.DataPropertyName = "Manager";
-            this.manager_DependentOf.HeaderText = "Manager";
-            this.manager_DependentOf.Name = "manager_DependentOf";
-            this.manager_DependentOf.Visible = false;
-            // 
-            // workson_Dependent
-            // 
-            this.workson_Dependent.DataPropertyName = "WorksOn";
-            this.workson_Dependent.HeaderText = "WorksOn";
-            this.workson_Dependent.Name = "workson_Dependent";
-            this.workson_Dependent.Visible = false;
-            // 
-            // dependents_DependentOf
-            // 
-            this.dependents_DependentOf.DataPropertyName = "Dependents";
-            this.dependents_DependentOf.HeaderText = "Dependents";
-            this.dependents_DependentOf.Name = "dependents_DependentOf";
-            this.dependents_DependentOf.Visible = false;
-            // 
-            // supervisor_DependentOf
-            // 
-            this.supervisor_DependentOf.DataPropertyName = "Supervisor";
-            this.supervisor_DependentOf.HeaderText = "Supervisor";
-            this.supervisor_DependentOf.Name = "supervisor_DependentOf";
-            this.supervisor_DependentOf.Visible = false;
-            // 
-            // supervisees_DependentOf
-            // 
-            this.supervisees_DependentOf.DataPropertyName = "Supervisees";
-            this.supervisees_DependentOf.HeaderText = "Supervisees";
-            this.supervisees_DependentOf.Name = "supervisees_DependentOf";
-            this.supervisees_DependentOf.Visible = false;
-            // 
-            // textBox_FNameEmployee
-            // 
-            this.textBox_FNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_FNameEmployee.Location = new System.Drawing.Point(413, 32);
-            this.textBox_FNameEmployee.Name = "textBox_FNameEmployee";
-            this.textBox_FNameEmployee.ReadOnly = true;
-            this.textBox_FNameEmployee.Size = new System.Drawing.Size(100, 26);
-            this.textBox_FNameEmployee.TabIndex = 28;
-            this.textBox_FNameEmployee.Visible = false;
-            // 
-            // textBox_LNameEmployee
-            // 
-            this.textBox_LNameEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_LNameEmployee.Location = new System.Drawing.Point(519, 32);
-            this.textBox_LNameEmployee.Name = "textBox_LNameEmployee";
-            this.textBox_LNameEmployee.ReadOnly = true;
-            this.textBox_LNameEmployee.Size = new System.Drawing.Size(100, 26);
-            this.textBox_LNameEmployee.TabIndex = 29;
-            this.textBox_LNameEmployee.Visible = false;
-            // 
-            // textBox_GenderDependentOld
-            // 
-            this.textBox_GenderDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_GenderDependentOld.Location = new System.Drawing.Point(8, 343);
-            this.textBox_GenderDependentOld.Name = "textBox_GenderDependentOld";
-            this.textBox_GenderDependentOld.ReadOnly = true;
-            this.textBox_GenderDependentOld.Size = new System.Drawing.Size(88, 26);
-            this.textBox_GenderDependentOld.TabIndex = 30;
-            this.textBox_GenderDependentOld.Visible = false;
-            // 
-            // textBox_NameDependentOld
-            // 
-            this.textBox_NameDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_NameDependentOld.Location = new System.Drawing.Point(8, 311);
-            this.textBox_NameDependentOld.Name = "textBox_NameDependentOld";
-            this.textBox_NameDependentOld.ReadOnly = true;
-            this.textBox_NameDependentOld.Size = new System.Drawing.Size(88, 26);
-            this.textBox_NameDependentOld.TabIndex = 31;
-            this.textBox_NameDependentOld.Visible = false;
-            // 
-            // textBox_BirthDateDependentOld
-            // 
-            this.textBox_BirthDateDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_BirthDateDependentOld.Location = new System.Drawing.Point(8, 375);
-            this.textBox_BirthDateDependentOld.Name = "textBox_BirthDateDependentOld";
-            this.textBox_BirthDateDependentOld.ReadOnly = true;
-            this.textBox_BirthDateDependentOld.Size = new System.Drawing.Size(88, 26);
-            this.textBox_BirthDateDependentOld.TabIndex = 32;
-            this.textBox_BirthDateDependentOld.Visible = false;
-            // 
-            // textBox_RelationshipDependentOld
-            // 
-            this.textBox_RelationshipDependentOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_RelationshipDependentOld.Location = new System.Drawing.Point(8, 407);
-            this.textBox_RelationshipDependentOld.Name = "textBox_RelationshipDependentOld";
-            this.textBox_RelationshipDependentOld.ReadOnly = true;
-            this.textBox_RelationshipDependentOld.Size = new System.Drawing.Size(88, 26);
-            this.textBox_RelationshipDependentOld.TabIndex = 33;
-            this.textBox_RelationshipDependentOld.Visible = false;
-            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1325,16 +1485,17 @@ namespace Lab_5
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Employee)).EndInit();
             this.tabPage_Dependent.ResumeLayout(false);
             this.tabPage_Dependent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentOf_Dependent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Dependent)).EndInit();
             this.tabPage_Project.ResumeLayout(false);
             this.tabPage_Project.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DepartmentProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Project)).EndInit();
             this.tabPage_Department.ResumeLayout(false);
             this.tabPage_Department.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Department)).EndInit();
             this.tabPage_WorksOn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_WorksOn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentOf_Dependent)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1465,5 +1626,20 @@ namespace Lab_5
         private System.Windows.Forms.TextBox textBox_BirthDateDependentOld;
         private System.Windows.Forms.TextBox textBox_NameDependentOld;
         private System.Windows.Forms.TextBox textBox_GenderDependentOld;
+        private System.Windows.Forms.DataGridView dataGridView_DepartmentProject;
+        private System.Windows.Forms.Label label_controlledby_DepartmetProject;
+        private System.Windows.Forms.Label label_dnumber_DepartmentProject;
+        private System.Windows.Forms.Label label_dname_DepartmentProject;
+        private System.Windows.Forms.TextBox textBox_NumberDepartmentNew;
+        private System.Windows.Forms.TextBox textBox_NameDepartmentNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dnumber_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dname_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locations_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employees_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn manager_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projects_DepartmentProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mgrstardate_DepartmentProject;
+        private System.Windows.Forms.TextBox textBox_NumberDepartmentOld;
+        private System.Windows.Forms.TextBox textBox_NameDepartmentOld;
     }
 }

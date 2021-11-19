@@ -13,11 +13,18 @@ namespace Lab_5
         public string PName { get; set; }
         public string Location { get; set; }
 
+        // Khởi tạo
         public Project(int pnumber = 0, string pname = "", string location = "")
         {
             PNumber = pnumber;
             PName = pname;
             Location = location;
+        }
+
+        // Phương thức
+        public string _ToString()
+        {
+            return PNumber.ToString() + "," + PName + "," + Location;
         }
 
         // Quan hệ
