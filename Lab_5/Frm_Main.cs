@@ -147,6 +147,48 @@ namespace Lab_5
             dataGridView_DependentOf.DataSource = list_Employee;
             dataGridView_ControlledBy.DataSource = list_Department;
             dataGridView_Manager.DataSource = list_Employee;
+
+            // Truy vấn 1: Tìm tất cả những người làm thuê có giới tính là nam
+            IList<Employee> listEmployee = database.DB.Query(delegate (Employee e)
+            {
+                if (e.Gender == "M") return true;
+                return false;
+            });
+            List<Employee> listCTV1 = new List<Employee>();
+            for(int i = 0; i < listEmployee.Count; ++i)
+            {
+                listCTV1.Add((Employee)listEmployee[i]);
+            }
+            dataGridView_CauTruyVan1.DataSource = listCTV1;
+
+            // Truy vấn 2: Tìm tất cả những người làm thuê đã làm việc cho ban ngành có tên có chữ T ở đầu
+            IList<Department> listDepartment = database.DB.Query(delegate(Department d) 
+            {
+                if (d.DName[0] == 'T') return true;
+                return false;
+            });
+            List<Employee> listCTV2 = new List<Employee>();
+            for(int i = 0; i < listDepartment.Count; ++i)
+            {
+                for(int j = 0; j < listDepartment[i].Employees.Count; ++j)
+                {
+                    if (listCTV2.Count == 0) listCTV2.Add((Employee)listDepartment[i].Employees[j]);
+                    else
+                    {
+                        bool check = false;
+                        for(int k = 0; k < listCTV2.Count; ++k)
+                        {
+                            if (listCTV2[k] == (Employee)listDepartment[i].Employees[j]) check = true;
+                        }
+                        if (check == true) continue;
+                        else
+                        {
+                            listCTV2.Add((Employee)listDepartment[i].Employees[j]);
+                        }
+                    }
+                }
+            }
+            dataGridView_CauTruyVan2.DataSource = listCTV2;
         }
 
         private void dataGridView_Employee_CellClick(object sender, DataGridViewCellEventArgs e)

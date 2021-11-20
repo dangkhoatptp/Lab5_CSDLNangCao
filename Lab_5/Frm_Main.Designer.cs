@@ -188,6 +188,14 @@ namespace Lab_5
             this.hours_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employee_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.project_WorksOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage_CauTruyVan1 = new System.Windows.Forms.TabPage();
+            this.tabPage_CauTruyVan2 = new System.Windows.Forms.TabPage();
+            this.tabPage_CauTruyVan3 = new System.Windows.Forms.TabPage();
+            this.tabPage_CauTruyVan4 = new System.Windows.Forms.TabPage();
+            this.dataGridView_CauTruyVan1 = new System.Windows.Forms.DataGridView();
+            this.label_CauTruyVan1 = new System.Windows.Forms.Label();
+            this.label_CauTruyVan2 = new System.Windows.Forms.Label();
+            this.dataGridView_CauTruyVan2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage_Employee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Employee)).BeginInit();
@@ -202,6 +210,10 @@ namespace Lab_5
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Department)).BeginInit();
             this.tabPage_WorksOn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_WorksOn)).BeginInit();
+            this.tabPage_CauTruyVan1.SuspendLayout();
+            this.tabPage_CauTruyVan2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CauTruyVan1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CauTruyVan2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -211,6 +223,10 @@ namespace Lab_5
             this.tabControl1.Controls.Add(this.tabPage_Project);
             this.tabControl1.Controls.Add(this.tabPage_Department);
             this.tabControl1.Controls.Add(this.tabPage_WorksOn);
+            this.tabControl1.Controls.Add(this.tabPage_CauTruyVan1);
+            this.tabControl1.Controls.Add(this.tabPage_CauTruyVan2);
+            this.tabControl1.Controls.Add(this.tabPage_CauTruyVan3);
+            this.tabControl1.Controls.Add(this.tabPage_CauTruyVan4);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1653,6 +1669,82 @@ namespace Lab_5
             this.project_WorksOn.HeaderText = "Project";
             this.project_WorksOn.Name = "project_WorksOn";
             // 
+            // tabPage_CauTruyVan1
+            // 
+            this.tabPage_CauTruyVan1.Controls.Add(this.dataGridView_CauTruyVan1);
+            this.tabPage_CauTruyVan1.Controls.Add(this.label_CauTruyVan1);
+            this.tabPage_CauTruyVan1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_CauTruyVan1.Name = "tabPage_CauTruyVan1";
+            this.tabPage_CauTruyVan1.Size = new System.Drawing.Size(1158, 534);
+            this.tabPage_CauTruyVan1.TabIndex = 5;
+            this.tabPage_CauTruyVan1.Text = "Câu truy vấn 1";
+            this.tabPage_CauTruyVan1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_CauTruyVan2
+            // 
+            this.tabPage_CauTruyVan2.Controls.Add(this.dataGridView_CauTruyVan2);
+            this.tabPage_CauTruyVan2.Controls.Add(this.label_CauTruyVan2);
+            this.tabPage_CauTruyVan2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_CauTruyVan2.Name = "tabPage_CauTruyVan2";
+            this.tabPage_CauTruyVan2.Size = new System.Drawing.Size(1158, 534);
+            this.tabPage_CauTruyVan2.TabIndex = 6;
+            this.tabPage_CauTruyVan2.Text = "Câu truy vấn 2";
+            this.tabPage_CauTruyVan2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_CauTruyVan3
+            // 
+            this.tabPage_CauTruyVan3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_CauTruyVan3.Name = "tabPage_CauTruyVan3";
+            this.tabPage_CauTruyVan3.Size = new System.Drawing.Size(1158, 534);
+            this.tabPage_CauTruyVan3.TabIndex = 7;
+            this.tabPage_CauTruyVan3.Text = "Câu truy vấn 3";
+            this.tabPage_CauTruyVan3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_CauTruyVan4
+            // 
+            this.tabPage_CauTruyVan4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_CauTruyVan4.Name = "tabPage_CauTruyVan4";
+            this.tabPage_CauTruyVan4.Size = new System.Drawing.Size(1158, 534);
+            this.tabPage_CauTruyVan4.TabIndex = 8;
+            this.tabPage_CauTruyVan4.Text = "Câu truy vấn 4";
+            this.tabPage_CauTruyVan4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_CauTruyVan1
+            // 
+            this.dataGridView_CauTruyVan1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_CauTruyVan1.Location = new System.Drawing.Point(0, 35);
+            this.dataGridView_CauTruyVan1.Name = "dataGridView_CauTruyVan1";
+            this.dataGridView_CauTruyVan1.Size = new System.Drawing.Size(1158, 499);
+            this.dataGridView_CauTruyVan1.TabIndex = 3;
+            // 
+            // label_CauTruyVan1
+            // 
+            this.label_CauTruyVan1.AutoSize = true;
+            this.label_CauTruyVan1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_CauTruyVan1.Location = new System.Drawing.Point(8, 7);
+            this.label_CauTruyVan1.Name = "label_CauTruyVan1";
+            this.label_CauTruyVan1.Size = new System.Drawing.Size(505, 25);
+            this.label_CauTruyVan1.TabIndex = 2;
+            this.label_CauTruyVan1.Text = "Tìm tất cả những người làm thuê có giới tính là nam.";
+            // 
+            // label_CauTruyVan2
+            // 
+            this.label_CauTruyVan2.AutoSize = true;
+            this.label_CauTruyVan2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_CauTruyVan2.Location = new System.Drawing.Point(8, 9);
+            this.label_CauTruyVan2.Name = "label_CauTruyVan2";
+            this.label_CauTruyVan2.Size = new System.Drawing.Size(803, 25);
+            this.label_CauTruyVan2.TabIndex = 3;
+            this.label_CauTruyVan2.Text = "Tìm tất cả những người làm thuê đã làm việc cho ban ngành có tên có chữ T ở đầu.";
+            // 
+            // dataGridView_CauTruyVan2
+            // 
+            this.dataGridView_CauTruyVan2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_CauTruyVan2.Location = new System.Drawing.Point(0, 37);
+            this.dataGridView_CauTruyVan2.Name = "dataGridView_CauTruyVan2";
+            this.dataGridView_CauTruyVan2.Size = new System.Drawing.Size(1158, 497);
+            this.dataGridView_CauTruyVan2.TabIndex = 4;
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1682,6 +1774,12 @@ namespace Lab_5
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Department)).EndInit();
             this.tabPage_WorksOn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_WorksOn)).EndInit();
+            this.tabPage_CauTruyVan1.ResumeLayout(false);
+            this.tabPage_CauTruyVan1.PerformLayout();
+            this.tabPage_CauTruyVan2.ResumeLayout(false);
+            this.tabPage_CauTruyVan2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CauTruyVan1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CauTruyVan2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1846,5 +1944,13 @@ namespace Lab_5
         private System.Windows.Forms.TextBox textBox_NameManager;
         private System.Windows.Forms.TextBox textBox_MgrStartDate;
         private System.Windows.Forms.Label label_MgrStartDateManager;
+        private System.Windows.Forms.TabPage tabPage_CauTruyVan1;
+        private System.Windows.Forms.TabPage tabPage_CauTruyVan2;
+        private System.Windows.Forms.TabPage tabPage_CauTruyVan3;
+        private System.Windows.Forms.TabPage tabPage_CauTruyVan4;
+        private System.Windows.Forms.DataGridView dataGridView_CauTruyVan1;
+        private System.Windows.Forms.Label label_CauTruyVan1;
+        private System.Windows.Forms.Label label_CauTruyVan2;
+        private System.Windows.Forms.DataGridView dataGridView_CauTruyVan2;
     }
 }
