@@ -22,20 +22,19 @@ namespace Lab_5
             database.CreateDatabase(); // Mở database
 
             // tab_Employee
-            textBox_Ssn.ReadOnly = false;
-            textBox_Ssn.Clear();
-            textBox_Ssn_Delete.Clear();
-            textBox_FName.Clear();
-            textBox_LName.Clear();
+            textBox_SsnEmployee.ReadOnly = false;
+            textBox_SsnEmployee.Clear();
+            textBox_FNameEmployee.Clear();
+            textBox_LNameEmployee.Clear();
             textBox_GenderEmployee.Clear();
-            textBox_MInit.Clear();
-            textBox_BirthDate.Clear();
-            textBox_Address.Clear();
-            textBox_Salary.Clear();
+            textBox_MInitEmployee.Clear();
+            textBox_BirthDateEmployee.Clear();
+            textBox_AddressEmployee.Clear();
+            textBox_SalaryEmployee.Clear();
 
             // tab_Dependent
             textBox_NameDependent.Clear();
-            textBox_GenderDepenednt.Clear();
+            textBox_GenderDependent.Clear();
             textBox_BirthDateDependent.Clear();
             comboBox_RelationshipDependent.Items.Clear();
             string[] relationships =
@@ -54,17 +53,32 @@ namespace Lab_5
             comboBox_RelationshipDependent.Items.AddRange(relationships);
             comboBox_RelationshipDependent.Text = "";
             textBox_SsnDependentOf.Clear();
+            textBox_SsnDependentOfOld.Clear();
             textBox_NameDependentOf.Clear();
-            textBox_FNameEmployee.Clear();
-            textBox_LNameEmployee.Clear();
+            textBox_NameDependentOld.Clear();
+            textBox_GenderDependentOld.Clear();
+            textBox_BirthDateDependentOld.Clear();
+            textBox_RelationshipDependentOld.Clear();
 
             // tab_Project
-            textBox_PNumberProject.ReadOnly = false;
-            textBox_PNumberProject.Clear();
-            textBox_PNameProject.Clear();
-            textBox_LocationProject.Clear();
-            textBox_NumberDepartmentNew.Clear();
-            textBox_NameDepartmentNew.Clear();
+            textBox_NumberProject.ReadOnly = false;
+            textBox_NumberProject.Clear();
+            textBox_NameProject.Clear();
+            comboBox_LocationProject.Items.Clear();
+            comboBox_LocationProject.Text = "";
+            textBox_NumberControlledBy.Clear();
+            textBox_NameControlledBy.Clear();
+            textBox_NumberControlledByOld.Clear();
+
+            // tab_Department
+            textBox_NumberDepartment.ReadOnly = false;
+            textBox_NumberDepartment.Clear();
+            textBox_NameDepartment.Clear();
+            textBox_LocationsDepartment.Clear();
+            textBox_SsnManager.Clear();
+            textBox_NameManager.Clear();
+            textBox_SsnManagerOld.Clear();
+            textBox_MgrStartDate.Clear();
 
             // Khởi tạo biến list để lưu dữ liệu Employee
             List<Employee> list_Employee = new List<Employee>();
@@ -130,37 +144,38 @@ namespace Lab_5
             dataGridView_Project.DataSource = list_Project;
             dataGridView_Department.DataSource = list_Department;
             dataGridView_WorksOn.DataSource = list_WorksOn;
-            dataGridView_DependentOf_Dependent.DataSource = list_Employee;
-            dataGridView_DepartmentProject.DataSource = list_Department;
+            dataGridView_DependentOf.DataSource = list_Employee;
+            dataGridView_ControlledBy.DataSource = list_Department;
+            dataGridView_Manager.DataSource = list_Employee;
         }
 
         private void dataGridView_Employee_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex != -1)
             {
-                DataGridViewRow row = dataGridView_Employee.Rows[e.RowIndex];
+                IObjectSet result = database.result_Employee();
+                Employee employee = (Employee)result[e.RowIndex];
 
-                textBox_Ssn.ReadOnly = true;
-                textBox_Ssn.Text = row.Cells[0].Value.ToString();
-                textBox_Ssn_Delete.Text = row.Cells[0].Value.ToString();
-                textBox_FName.Text = row.Cells[1].Value.ToString();
-                textBox_LName.Text = row.Cells[3].Value.ToString();
-                textBox_GenderEmployee.Text = row.Cells[7].Value.ToString();
-                textBox_MInit.Text = row.Cells[2].Value.ToString();
-                textBox_Address.Text = row.Cells[4].Value.ToString();
-                textBox_BirthDate.Text = row.Cells[5].Value.ToString();
-                textBox_Salary.Text = row.Cells[6].Value.ToString();
+                textBox_SsnEmployee.ReadOnly = true;
+                textBox_SsnEmployee.Text = employee.Ssn.ToString();
+                textBox_FNameEmployee.Text = employee.FName;
+                textBox_LNameEmployee.Text = employee.LName;
+                textBox_MInitEmployee.Text = employee.MInit;
+                textBox_GenderEmployee.Text = employee.Gender;
+                textBox_AddressEmployee.Text = employee.Address;
+                textBox_BirthDateEmployee.Text = employee.BirthDate;
+                textBox_SalaryEmployee.Text = employee.Salary.ToString();
             }
         }
-        private void dataGridView_DependentOf_Dependent_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_DependentOf_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex != -1)
             {
-                DataGridViewRow row = dataGridView_DependentOf_Dependent.Rows[e.RowIndex];
-                textBox_SsnDependentOf.Text = row.Cells[0].Value.ToString();
-                textBox_NameDependentOf.Text = row.Cells[1].Value.ToString() + " " + row.Cells[3].Value.ToString();
-                textBox_FNameEmployee.Text = row.Cells[1].Value.ToString();
-                textBox_LNameEmployee.Text = row.Cells[3].Value.ToString();
+                IObjectSet result = database.result_Employee();
+                Employee dependentOf = (Employee)result[e.RowIndex];
+
+                textBox_SsnDependentOf.Text = dependentOf.Ssn.ToString();
+                textBox_NameDependentOf.Text = dependentOf.FName + " " + dependentOf.LName;
             }
         }
         private void dataGridView_Dependent_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -171,55 +186,112 @@ namespace Lab_5
                 Dependent dependent = (Dependent)result[e.RowIndex];
 
                 textBox_NameDependent.Text = dependent.Name;
-                textBox_GenderDepenednt.Text = dependent.Gender;
+                textBox_GenderDependent.Text = dependent.Gender;
                 textBox_BirthDateDependent.Text = dependent.BirthDate;
                 comboBox_RelationshipDependent.Text = dependent.Relationship;
                 textBox_SsnDependentOf.Text = dependent.DependentOf.Ssn.ToString();
+                textBox_SsnDependentOfOld.Text = dependent.DependentOf.Ssn.ToString();
                 textBox_NameDependentOf.Text = dependent.DependentOf.FName + " " + dependent.DependentOf.LName;
-                textBox_FNameEmployee.Text = dependent.DependentOf.FName;
-                textBox_LNameEmployee.Text = dependent.DependentOf.LName;
                 textBox_NameDependentOld.Text = dependent.Name;
                 textBox_GenderDependentOld.Text = dependent.Gender;
                 textBox_BirthDateDependentOld.Text = dependent.BirthDate;
                 textBox_RelationshipDependentOld.Text = dependent.Relationship;
             }
         }
-        private void dataGridView_DepartmentProject_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_ControlledBy_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             IObjectSet result = database.result_Department();
             Department department = (Department)result[e.RowIndex];
-            textBox_NumberDepartmentNew.Text = department.DNumber.ToString();
-            textBox_NameDepartmentNew.Text = department.DName;
+
+            textBox_NumberControlledBy.Text = department.DNumber.ToString();
+            textBox_NameControlledBy.Text = department.DName;
+            comboBox_LocationProject.Text = "";
+            comboBox_LocationProject.Items.Clear();
+            for(int i = 0; i < department.Locations.Count; ++i)
+            {
+                comboBox_LocationProject.Items.Add(department.Locations[i]);
+            }
         }
         private void dataGridView_Project_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            textBox_PNumberProject.ReadOnly = true;
+            textBox_NumberProject.ReadOnly = true;
             IObjectSet result = database.result_Project();
             if(e.RowIndex != -1)
             {
                 Project project = (Project)result[e.RowIndex];
-                textBox_PNumberProject.Text = project.PNumber.ToString();
-                textBox_PNameProject.Text = project.PName;
-                textBox_LocationProject.Text = project.Location;
-                textBox_NumberDepartmentNew.Text = project.ControlledBy.DNumber.ToString();
-                textBox_NameDepartmentNew.Text = project.ControlledBy.DName;
-                textBox_NumberDepartmentOld.Text = project.ControlledBy.DNumber.ToString();
-                textBox_NameDepartmentOld.Text = project.ControlledBy.DName;
+                textBox_NumberProject.Text = project.PNumber.ToString();
+                textBox_NameProject.Text = project.PName;
+                comboBox_LocationProject.Items.Clear();
+                for(int i = 0; i < project.ControlledBy.Locations.Count; ++i)
+                {
+                    comboBox_LocationProject.Items.Add(project.ControlledBy.Locations[i]);
+                }
+                comboBox_LocationProject.Text = project.Location;
+                textBox_NumberControlledBy.Text = project.ControlledBy.DNumber.ToString();
+                textBox_NameControlledBy.Text = project.ControlledBy.DName;
+                textBox_NumberControlledByOld.Text = project.ControlledBy.DNumber.ToString();
             }
         }
+        private void dataGridView_Manager_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex != -1)
+            {
+                IObjectSet result = database.result_Employee();
+                Employee manager = (Employee)result[e.RowIndex];
+
+                textBox_MgrStartDate.Clear();
+                textBox_SsnManager.Text = manager.Ssn.ToString();
+                textBox_NameManager.Text = manager.FName + " " + manager.LName;
+            }
+        }
+        private void dataGridView_Department_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex != -1)
+            {
+                textBox_NumberDepartment.ReadOnly = true;
+
+                IObjectSet result = database.result_Department();
+                Department department = (Department)result[e.RowIndex];
+
+                textBox_NumberDepartment.Text = department.DNumber.ToString();
+                textBox_NameDepartment.Text = department.DName;
+                string locations = null;
+                for(int i = 0; i < department.Locations.Count; ++i)
+                {
+                    if (i == 0) locations = department.Locations[i];
+                    else locations += "," + department.Locations[i];
+                }
+                textBox_LocationsDepartment.Text = locations;
+                if(department.Manager != null)
+                {
+                    textBox_SsnManager.Text = department.Manager.Ssn.ToString();
+                    textBox_SsnManagerOld.Text = department.Manager.Ssn.ToString();
+                    textBox_NameManager.Text = department.Manager.FName + " " + department.Manager.LName;
+                    textBox_MgrStartDate.Text = department.MgrStartDate;
+                }
+                else
+                {
+                    textBox_SsnManager.Clear();
+                    textBox_SsnManagerOld.Clear();
+                    textBox_NameManager.Clear();
+                    textBox_MgrStartDate.Clear();
+                }
+            }
+        }
+
 
         private void button_AddEmployee_Click(object sender, EventArgs e)
         {
             int ssn = -1;
-            if (textBox_Ssn.Text != "") ssn = int.Parse(textBox_Ssn.Text);
-            string fname = textBox_FName.Text;
-            string lname = textBox_LName.Text;
+            if (textBox_SsnEmployee.Text != "") ssn = int.Parse(textBox_SsnEmployee.Text);
+            string fname = textBox_FNameEmployee.Text;
+            string lname = textBox_LNameEmployee.Text;
             string gender = textBox_GenderEmployee.Text;
-            string minit = textBox_MInit.Text;
-            string address = textBox_Address.Text;
-            string birthdate = textBox_BirthDate.Text;
+            string minit = textBox_MInitEmployee.Text;
+            string address = textBox_AddressEmployee.Text;
+            string birthdate = textBox_BirthDateEmployee.Text;
             double salary = -1;
-            if(textBox_Salary.Text != "") salary = double.Parse(textBox_Salary.Text);
+            if(textBox_SalaryEmployee.Text != "") salary = double.Parse(textBox_SalaryEmployee.Text);
 
             string thongbao = null;
 
@@ -275,20 +347,22 @@ namespace Lab_5
             if(thongbao != null) MessageBox.Show(thongbao);
             else
             {
-                Employee temp = new Employee(ssn, null, null, null, null, null, 0, null);
-                IObjectSet searchEmployee = database.DB.QueryByExample(temp);
-                if(searchEmployee.Count != 0) MessageBox.Show("Ssn bị trùng, vui lòng nhập lại");
+                Employee employee = new Employee(ssn, null, null, null, null, null, 0, null);
+                IObjectSet result = database.DB.QueryByExample(employee);
+                if(result.Count != 0) MessageBox.Show("Ssn bị trùng, vui lòng nhập lại");
                 else
                 {
-                    Employee employeeAdd = new Employee(ssn, fname, minit, lname, address, birthdate, salary, gender);
-                    database.DB.Store(employeeAdd);
-                    IObjectSet result = database.result_Employee();
+                    employee = new Employee(ssn, fname, minit, lname, address, birthdate, salary, gender);
+                    database.DB.Store(employee);
+
+                    result = database.result_Employee();
                     int countNew = result.Count;
                     string[] data_EmployeeNew = new string[countNew + 1];
+
                     data_EmployeeNew[0] = countNew.ToString();
                     for (int i = 0; i < countNew; ++i)
                     {
-                        temp = (Employee)result[i];
+                        Employee temp = (Employee)result[i];
                         data_EmployeeNew[i + 1] = temp._ToString();
                     }
                     File.WriteAllLines("data_Employee.txt", data_EmployeeNew);
@@ -299,10 +373,10 @@ namespace Lab_5
                 }
             }
         }
-        private void button_DeleteEmployee_Click(object sender, EventArgs e)
+        private void button_DeleteEmployee_Click(object sender, EventArgs e) // Xem lại phần này
         {
             int ssn = -1;
-            if (textBox_Ssn_Delete.Text != "") ssn = int.Parse(textBox_Ssn_Delete.Text);
+            if (textBox_SsnEmployee.Text != "") ssn = int.Parse(textBox_SsnEmployee.Text);
 
             if (ssn == -1) MessageBox.Show("Bạn chưa chọn Employee để xóa");
             else
@@ -350,98 +424,99 @@ namespace Lab_5
         private void button_ModifyEmployee_Click(object sender, EventArgs e)
         {
             int ssn = -1;
-            if(textBox_Ssn.Text != "") ssn = int.Parse(textBox_Ssn.Text);
-            string fname = textBox_FName.Text;
-            string lname = textBox_LName.Text;
+            if(textBox_SsnEmployee.Text != "") ssn = int.Parse(textBox_SsnEmployee.Text);
+            string fname = textBox_FNameEmployee.Text;
+            string lname = textBox_LNameEmployee.Text;
             string gender = textBox_GenderEmployee.Text;
-            string minit = textBox_MInit.Text;
-            string birthdate = textBox_BirthDate.Text;
-            string address = textBox_Address.Text;
+            string minit = textBox_MInitEmployee.Text;
+            string birthdate = textBox_BirthDateEmployee.Text;
+            string address = textBox_AddressEmployee.Text;
             double salary = -1; 
-            if(textBox_Salary.Text != "") salary = double.Parse(textBox_Salary.Text);
+            if(textBox_SalaryEmployee.Text != "") salary = double.Parse(textBox_SalaryEmployee.Text);
 
             string thongbao = null;
 
-            if (ssn == -1)
-            {
-                string thongbaossn = "- Ssn\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaossn;
-                else thongbao += thongbaossn;
-            }
-            if (fname == "")
-            {
-                string thongbaofname = "- First name\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaofname;
-                else thongbao += thongbaofname;
-            }
-            if (lname == "")
-            {
-                string thongbaolname = "- Last name\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolname;
-                else thongbao += thongbaolname;
-            }
-            if (gender == "")
-            {
-                string thongbaogender = "- Gender\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaogender;
-                else thongbao += thongbaogender;
-            }
-            if (minit == "")
-            {
-                string thongbaominit = "- MInit\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaominit;
-                else thongbao += thongbaominit;
-            }
-            if (address == "")
-            {
-                string thongbaoaddress = "- Address\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoaddress;
-                else thongbao += thongbaoaddress;
-            }
-            if (birthdate == "")
-            {
-                string thongbaobirthdate = "- Birthdate\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaobirthdate;
-                else thongbao += thongbaobirthdate;
-            }
-            if (salary == -1)
-            {
-                string thongbaosalary = "- Salary\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaosalary;
-                else thongbao += thongbaosalary;
-            }
-
-            if (thongbao != null) MessageBox.Show(thongbao);
+            if (ssn == -1) MessageBox.Show("Bạn chưa chọn employee để sửa");
             else
             {
-                Employee employee = new Employee(ssn, null, null, null, null, null, 0, null);
-                IObjectSet result = database.DB.QueryByExample(employee);
-                if(result.Count != 0)
+                if (fname == "")
                 {
-                    employee = (Employee)result[0];
-                    employee.FName = fname;
-                    employee.LName = lname;
-                    employee.Gender = gender;
-                    employee.MInit = minit;
-                    employee.BirthDate = birthdate;
-                    employee.Address = address;
-                    employee.Salary = salary;
+                    string thongbaofname = "- First name\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaofname;
+                    else thongbao += thongbaofname;
+                }
+                if (lname == "")
+                {
+                    string thongbaolname = "- Last name\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolname;
+                    else thongbao += thongbaolname;
+                }
+                if (gender == "")
+                {
+                    string thongbaogender = "- Gender\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaogender;
+                    else thongbao += thongbaogender;
+                }
+                if (minit == "")
+                {
+                    string thongbaominit = "- MInit\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaominit;
+                    else thongbao += thongbaominit;
+                }
+                if (address == "")
+                {
+                    string thongbaoaddress = "- Address\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoaddress;
+                    else thongbao += thongbaoaddress;
+                }
+                if (birthdate == "")
+                {
+                    string thongbaobirthdate = "- Birthdate\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaobirthdate;
+                    else thongbao += thongbaobirthdate;
+                }
+                if (salary == -1)
+                {
+                    string thongbaosalary = "- Salary\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaosalary;
+                    else thongbao += thongbaosalary;
+                }
 
-                    database.DB.Store(employee);
-                    result = database.result_Employee();
-                    int countNew = result.Count;
-                    string[] data_EmployeeNew = new string[countNew + 1];
-                    data_EmployeeNew[0] = countNew.ToString();
-                    for(int i = 0; i < countNew; ++i)
+                if (thongbao != null) MessageBox.Show(thongbao);
+                else
+                {
+                    Employee employee = new Employee(ssn, null, null, null, null, null, 0, null);
+                    IObjectSet result = database.DB.QueryByExample(employee);
+                    if (result.Count != 0)
                     {
-                        Employee temp = (Employee)result[i];
-                        data_EmployeeNew[i + 1] = temp._ToString();
+                        employee = (Employee)result[0];
+                        employee.FName = fname;
+                        employee.LName = lname;
+                        employee.Gender = gender;
+                        employee.MInit = minit;
+                        employee.BirthDate = birthdate;
+                        employee.Address = address;
+                        employee.Salary = salary;
+
+                        database.DB.Store(employee);
+
+                        result = database.result_Employee();
+                        int countNew = result.Count;
+                        string[] data_EmployeeNew = new string[countNew + 1];
+
+                        data_EmployeeNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Employee temp = (Employee)result[i];
+                            data_EmployeeNew[i + 1] = temp._ToString();
+                        }
+
+                        File.WriteAllLines("data_Employee.txt", data_EmployeeNew);
+
+                        MessageBox.Show("Sửa thành công");
+
+                        LoadData();
                     }
-                    File.WriteAllLines("data_Employee.txt", data_EmployeeNew);
-
-                    MessageBox.Show("Sửa thành công");
-
-                    LoadData();
                 }
             }
         }
@@ -485,6 +560,20 @@ namespace Lab_5
                 e.Handled = true;
             }
         }
+        private void textBox_NumberDepartment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Xác thực rằng phím vừa nhấn không phải CTRL hoặc không phải dạng số
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
 
         private void button_Reset_Employee_Click(object sender, EventArgs e)
         {
@@ -506,13 +595,12 @@ namespace Lab_5
         private void button_AddDependent_Click(object sender, EventArgs e)
         {
             string name = textBox_NameDependent.Text;
-            string gender = textBox_GenderDepenednt.Text;
+            string gender = textBox_GenderDependent.Text;
             string birthdate = textBox_BirthDateDependent.Text;
             string relationship = comboBox_RelationshipDependent.Text;
-            string ssn_Employee = textBox_SsnDependentOf.Text;
-            string name_Employee = textBox_NameDependentOf.Text;
-            string fname_Employee = textBox_FNameEmployee.Text;
-            string lname_Employee = textBox_LNameEmployee.Text;
+            int ssnEmployee = -1;
+            if(textBox_SsnDependentOf.Text != "") ssnEmployee = int.Parse(textBox_SsnDependentOf.Text);
+            string nameEmployee = textBox_NameDependentOf.Text;
 
             string thongbao = null;
 
@@ -540,13 +628,13 @@ namespace Lab_5
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaorelationship;
                 else thongbao += thongbaorelationship;
             }
-            if (ssn_Employee == "")
+            if (ssnEmployee == -1)
             {
                 string thongbaossn = "- Ssn Employee\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaossn;
                 else thongbao += thongbaossn;
             }
-            if (name_Employee == "")
+            if (nameEmployee == "")
             {
                 string thongbaoname = "- Name Employee\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
@@ -558,9 +646,10 @@ namespace Lab_5
             {
                 Dependent dependent = new Dependent(name, gender, birthdate, relationship);
 
-                Employee employee = new Employee(int.Parse(ssn_Employee), fname_Employee, null, lname_Employee, null, null, 0, null);
+                Employee employee = new Employee(ssnEmployee, null, null, null, null, null, 0, null);
                 IObjectSet result = database.DB.QueryByExample(employee);
                 employee = (Employee)result[0];
+
                 if (employee.Dependents == null) employee.Dependents = new List<Dependent>();
                 employee.Dependents.Add(dependent);
                 dependent.DependentOf = employee;
@@ -588,94 +677,27 @@ namespace Lab_5
         }
         private void button_DeleteDependent_Click(object sender, EventArgs e)
         {
-            string name = textBox_NameDependent.Text;
-            string gender = textBox_GenderDepenednt.Text;
-            string birthdate = textBox_BirthDateDependent.Text;
-            string relationship = comboBox_RelationshipDependent.Text;
+            string name = textBox_NameDependentOld.Text;
+            string gender = textBox_GenderDependentOld.Text;
+            string birthdate = textBox_BirthDateDependentOld.Text;
+            string relationship = textBox_RelationshipDependentOld.Text;
 
-            Dependent dependent = new Dependent(name, gender, birthdate, relationship);
-            IObjectSet result = database.DB.QueryByExample(dependent);
-            if(result.Count != 0)
-            {
-                dependent = (Dependent)result[0];
-                database.DB.Delete(dependent);
-
-                result = database.result_Dependent();
-                int countNew = result.Count;
-                string[] data_DependentNew = new string[countNew + 1];
-
-                data_DependentNew[0] = countNew.ToString();
-                for(int i = 0; i < countNew; ++i)
-                {
-                    Dependent temp = (Dependent)result[i];
-                    data_DependentNew[i + 1] = temp._ToString();
-                }
-
-                File.WriteAllLines("data_Dependent.txt", data_DependentNew);
-
-                MessageBox.Show("Xóa thành công");
-
-                LoadData();
-            }
-        }
-        private void button_ModifyDependent_Click(object sender, EventArgs e)
-        {
-            string name = textBox_NameDependent.Text;
-            string gender = textBox_GenderDepenednt.Text;
-            string birthdate = textBox_BirthDateDependent.Text;
-            string relationship = comboBox_RelationshipDependent.Text;
-
-            string thongbao = null;
-
-            if(name == "")
-            {
-                string thongbaoname = "- Name dependent";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
-                else thongbao += thongbaoname;
-            }
-            if (gender == "")
-            {
-                string thongbaogender = "- Gender dependent";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaogender;
-                else thongbao += thongbaogender;
-            }
-            if (birthdate == "")
-            {
-                string thongbaobirthdate = "- BirthDate dependent";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaobirthdate;
-                else thongbao += thongbaobirthdate;
-            }
-            if (relationship == "")
-            {
-                string thongbaorelationship = "- Relationship dependent";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaorelationship;
-                else thongbao += thongbaorelationship;
-            }
-
-            if (thongbao != null) MessageBox.Show(thongbao);
+            if (name == "" && gender == "" && birthdate == "" && relationship == "") MessageBox.Show("Bạn chưa chọn dependent để xóa");
             else
             {
-                string nameOld = textBox_NameDependentOld.Text;
-                string genderOld = textBox_GenderDependentOld.Text;
-                string birthDateOld = textBox_BirthDateDependentOld.Text;
-                string relationshipOld = textBox_RelationshipDependentOld.Text;
-                Dependent dependent = new Dependent(nameOld, genderOld, birthDateOld, relationshipOld);
+                Dependent dependent = new Dependent(name, gender, birthdate, relationship);
                 IObjectSet result = database.DB.QueryByExample(dependent);
-                if(result.Count != 0)
+                if (result.Count != 0)
                 {
                     dependent = (Dependent)result[0];
-                    dependent.Name = name;
-                    dependent.Gender = gender;
-                    dependent.BirthDate = birthdate;
-                    dependent.Relationship = relationship;
-                    database.DB.Store(dependent);
+                    database.DB.Delete(dependent);
 
                     result = database.result_Dependent();
                     int countNew = result.Count;
                     string[] data_DependentNew = new string[countNew + 1];
 
                     data_DependentNew[0] = countNew.ToString();
-                    for(int i = 0; i < countNew; ++i)
+                    for (int i = 0; i < countNew; ++i)
                     {
                         Dependent temp = (Dependent)result[i];
                         data_DependentNew[i + 1] = temp._ToString();
@@ -683,50 +705,141 @@ namespace Lab_5
 
                     File.WriteAllLines("data_Dependent.txt", data_DependentNew);
 
-                    MessageBox.Show("Sửa thành công");
+                    MessageBox.Show("Xóa thành công");
 
                     LoadData();
+                }
+            }
+        }
+        private void button_ModifyDependent_Click(object sender, EventArgs e)
+        {
+            string nameDependentNew = textBox_NameDependent.Text;
+            string genderDependentNew = textBox_GenderDependent.Text;
+            string birthdateDependentNew = textBox_BirthDateDependent.Text;
+            string relationshipDependentNew = comboBox_RelationshipDependent.Text;
+
+            string nameDependentOld = textBox_NameDependentOld.Text;
+            string genderDependentOld = textBox_GenderDependentOld.Text;
+            string birthDateDependentOld = textBox_BirthDateDependentOld.Text;
+            string relationshipDependentOld = textBox_RelationshipDependentOld.Text;
+
+            int ssnDependentOf = -1;
+            if(textBox_SsnDependentOf.Text != "") ssnDependentOf = int.Parse(textBox_SsnDependentOf.Text);
+            int ssnDependentOfOld = -1;
+            if(textBox_SsnDependentOfOld.Text != "") ssnDependentOfOld = int.Parse(textBox_SsnDependentOfOld.Text);
+
+            if (ssnDependentOf == -1) MessageBox.Show("Bạn chưa chọn dependent để sửa");
+            else
+            {
+                string thongbao = null;
+
+                if (nameDependentNew == "")
+                {
+                    string thongbaoname = "- Name dependent\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
+                    else thongbao += thongbaoname;
+                }
+                if (genderDependentNew == "")
+                {
+                    string thongbaogender = "- Gender dependent\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaogender;
+                    else thongbao += thongbaogender;
+                }
+                if (birthdateDependentNew == "")
+                {
+                    string thongbaobirthdate = "- BirthDate dependent\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaobirthdate;
+                    else thongbao += thongbaobirthdate;
+                }
+                if (relationshipDependentNew == "")
+                {
+                    string thongbaorelationship = "- Relationship dependent\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaorelationship;
+                    else thongbao += thongbaorelationship;
+                }
+
+                if (thongbao != null) MessageBox.Show(thongbao);
+                else
+                {
+                    Dependent dependent = new Dependent(nameDependentOld, genderDependentOld, birthDateDependentOld, relationshipDependentOld);
+                    IObjectSet result = database.DB.QueryByExample(dependent);
+                    if (result.Count != 0)
+                    {
+                        dependent = (Dependent)result[0];
+                        dependent.Name = nameDependentNew;
+                        dependent.Gender = genderDependentNew;
+                        dependent.BirthDate = birthdateDependentNew;
+                        dependent.Relationship = relationshipDependentNew;
+
+                        if (ssnDependentOf != ssnDependentOfOld)
+                        {
+                            Employee dependentOfNew = new Employee(ssnDependentOf, null, null, null, null, null, 0, null);
+                            result = database.DB.QueryByExample(dependentOfNew);
+                            dependentOfNew = (Employee)result[0];
+
+                            dependent.DependentOf = dependentOfNew;
+                        }
+
+                        database.DB.Store(dependent);
+
+                        result = database.result_Dependent();
+                        int countNew = result.Count;
+                        string[] data_DependentNew = new string[countNew + 1];
+
+                        data_DependentNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Dependent temp = (Dependent)result[i];
+                            data_DependentNew[i + 1] = temp._ToString();
+                        }
+
+                        File.WriteAllLines("data_Dependent.txt", data_DependentNew);
+
+                        MessageBox.Show("Sửa thành công");
+
+                        LoadData();
+                    }
                 }
             }
         }
 
         private void button_AddProject_Click(object sender, EventArgs e)
         {
-            int number_Project = -1;
-            if (textBox_PNumberProject.Text != "") number_Project = int.Parse(textBox_PNumberProject.Text);
-            string name_Project = textBox_PNameProject.Text;
-            string location_Project = textBox_LocationProject.Text;
-            int number_Department = -1;
-            if (textBox_NumberDepartmentNew.Text != "") number_Department = int.Parse(textBox_NumberDepartmentNew.Text);
-            string name_Department = textBox_NameDepartmentNew.Text;
+            int numberProject = -1;
+            if (textBox_NumberProject.Text != "") numberProject = int.Parse(textBox_NumberProject.Text);
+            string nameProject = textBox_NameProject.Text;
+            string locationProject = comboBox_LocationProject.Text;
+            int numberDepartment = -1;
+            if (textBox_NumberControlledBy.Text != "") numberDepartment = int.Parse(textBox_NumberControlledBy.Text);
+            string nameDepartment = textBox_NameControlledBy.Text;
 
             string thongbao = null;
 
-            if(number_Project == -1)
+            if(numberProject == -1)
             {
                 string thongbaonumberProject = "- Number project\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonumberProject;
                 else thongbao += thongbaonumberProject;
             }
-            if (name_Project == "")
+            if (nameProject == "")
             {
                 string thongbaonameProject = "- Name project\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonameProject;
                 else thongbao += thongbaonameProject;
             }
-            if (location_Project == "")
+            if (locationProject == "")
             {
                 string thongbaolocationProject = "- Location project\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocationProject;
                 else thongbao += thongbaolocationProject;
             }
-            if (number_Department == -1)
+            if (numberDepartment == -1)
             {
                 string thongbaonumberDepartment = "- Number department\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonumberDepartment;
                 else thongbao += thongbaonumberDepartment;
             }
-            if (name_Department == "")
+            if (nameDepartment == "")
             {
                 string thongbaonameDepartment = "- Name department\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonameDepartment;
@@ -736,13 +849,14 @@ namespace Lab_5
             if (thongbao != null) MessageBox.Show(thongbao);
             else
             {
-                Project project = new Project(number_Project, null, null);
+                Project project = new Project(numberProject, null, null);
                 IObjectSet result = database.DB.QueryByExample(project);
                 if (result.Count != 0) MessageBox.Show("Number project bị trùng, vui lòng nhập lại");
                 else
                 {
-                    project = new Project(number_Project, name_Project, location_Project);
-                    Department department = new Department(number_Department, name_Department, null);
+                    project = new Project(numberProject, nameProject, locationProject);
+
+                    Department department = new Department(numberDepartment, nameDepartment, null);
                     result = database.DB.QueryByExample(department);
                     if (result.Count != 0)
                     {
@@ -806,197 +920,549 @@ namespace Lab_5
                         LoadData();
                     }
                 }
-
-                
             }
         }
         private void button_DeleteProject_Click(object sender, EventArgs e)
         {
-            int number_Project = int.Parse(textBox_PNumberProject.Text);
-            int number_Department = int.Parse(textBox_NumberDepartmentOld.Text);
-            string name_Department = textBox_NameDepartmentOld.Text;
+            int numberProject = -1;
+            if(textBox_NumberProject.Text != "") numberProject = int.Parse(textBox_NumberProject.Text);
+            int numberDepartment = -1;
+            if(textBox_NumberControlledByOld.Text != "") numberDepartment = int.Parse(textBox_NumberControlledByOld.Text);
 
-            Project project = new Project(number_Project, null, null);
-            IObjectSet result = database.DB.QueryByExample(project);
-            project = (Project)result[0];
-
-            Department department = new Department(number_Department, name_Department, null);
-            result = database.DB.QueryByExample(department);
-            department = (Department)result[0];
-            department.Projects.Remove(project);
-
-            database.DB.Store(department);
-            database.DB.Delete(project);
-
-            result = database.result_Project();
-            int countNew = result.Count;
-            string[] data_ProjectNew = new string[countNew + 1];
-
-            data_ProjectNew[0] = countNew.ToString();
-            for (int i = 0; i < countNew; ++i)
+            if (numberDepartment == -1) MessageBox.Show("Bạn chưa chọn project để xóa");
+            else
             {
-                Project temp = (Project)result[i];
-                data_ProjectNew[i + 1] = temp._ToString();
-            }
+                Project project = new Project(numberProject, null, null);
+                IObjectSet result = database.DB.QueryByExample(project);
+                project = (Project)result[0];
 
-            File.WriteAllLines("data_Project.txt", data_ProjectNew);
+                Department department = new Department(numberDepartment, null, null);
+                result = database.DB.QueryByExample(department);
+                department = (Department)result[0];
+                department.Projects.Remove(project);
 
-            result = database.result_Department();
-            int count = 0;
-            string[] data_Temp = new string[result.Count];
+                database.DB.Store(department);
+                database.DB.Delete(project);
 
-            for (int i = 0; i < result.Count; ++i)
-            {
-                Department temp = (Department)result[i];
-                if (temp.Projects != null && temp.Projects.Count != 0)
+                result = database.result_Project();
+                int countNew = result.Count;
+                string[] data_ProjectNew = new string[countNew + 1];
+
+                data_ProjectNew[0] = countNew.ToString();
+                for (int i = 0; i < countNew; ++i)
                 {
-                    data_Temp[i] = temp.DNumber.ToString() + ": ";
-                    for (int j = 0; j < temp.Projects.Count; ++j)
-                    {
-                        if (j == 0)
-                        {
-                            data_Temp[i] += temp.Projects[j].PNumber.ToString();
-                        }
-                        else
-                        {
-                            data_Temp[i] += ", " + temp.Projects[j].PNumber.ToString();
-                        }
-                    }
-                    ++count;
+                    Project temp = (Project)result[i];
+                    data_ProjectNew[i + 1] = temp._ToString();
                 }
+
+                File.WriteAllLines("data_Project.txt", data_ProjectNew);
+
+                result = database.result_Department();
+                int count = 0;
+                string[] data_Temp = new string[result.Count];
+
+                for (int i = 0; i < result.Count; ++i)
+                {
+                    Department temp = (Department)result[i];
+                    if (temp.Projects != null && temp.Projects.Count != 0)
+                    {
+                        data_Temp[i] = temp.DNumber.ToString() + ": ";
+                        for (int j = 0; j < temp.Projects.Count; ++j)
+                        {
+                            if (j == 0)
+                            {
+                                data_Temp[i] += temp.Projects[j].PNumber.ToString();
+                            }
+                            else
+                            {
+                                data_Temp[i] += ", " + temp.Projects[j].PNumber.ToString();
+                            }
+                        }
+                        ++count;
+                    }
+                }
+
+                string[] data_ControlledByNew = new string[count + 1];
+                data_ControlledByNew[0] = count.ToString();
+                for (int i = 0; i < data_ControlledByNew.Length - 1; ++i)
+                {
+                    if (data_Temp[i] != null) data_ControlledByNew[i + 1] = data_Temp[i];
+                }
+
+                File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+
+                MessageBox.Show("Xóa thành công");
+
+                LoadData();
             }
-
-            string[] data_ControlledByNew = new string[count + 1];
-            data_ControlledByNew[0] = count.ToString();
-            for (int i = 0; i < data_ControlledByNew.Length - 1; ++i)
-            {
-                if (data_Temp[i] != null) data_ControlledByNew[i + 1] = data_Temp[i];
-            }
-
-            File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
-
-            MessageBox.Show("Xóa thành công");
-
-            LoadData();
         }
         private void button_ModifyProject_Click(object sender, EventArgs e)
         {
-            int number_Project = int.Parse(textBox_PNumberProject.Text);
-            string name_ProjectNew = textBox_PNameProject.Text;
-            string location_ProjectNew = textBox_LocationProject.Text;
+            int numberProject = -1;
+            if(textBox_NumberProject.Text != "") numberProject = int.Parse(textBox_NumberProject.Text);
+            string nameProjectNew = textBox_NameProject.Text;
+            string locationProjectNew = comboBox_LocationProject.Text;
 
-            int number_DepartmentNew = -1;
-            if(textBox_NumberDepartmentNew.Text != "") number_DepartmentNew = int.Parse(textBox_NumberDepartmentNew.Text);
-            string name_DepartmentNew = textBox_NameDepartmentNew.Text;
+            int numberDepartmentNew = -1;
+            if(textBox_NumberControlledBy.Text != "") numberDepartmentNew = int.Parse(textBox_NumberControlledBy.Text);
+            int numberDepartmentOld = -1; 
+            if(textBox_NumberControlledByOld.Text != "") numberDepartmentOld = int.Parse(textBox_NumberControlledByOld.Text);
 
-            int number_DepartmentOld = -1; 
-            if(textBox_NumberDepartmentOld.Text != "") number_DepartmentOld = int.Parse(textBox_NumberDepartmentOld.Text);
-            string name_DepartmentOld = textBox_NameDepartmentOld.Text;
+            if (numberDepartmentOld == -1) MessageBox.Show("Bạn chưa chọn project để sửa");
+            else
+            {
+                string thongbao = null;
+
+                if (nameProjectNew == "")
+                {
+                    string thongbaoname = "- Name project\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
+                    else thongbao += thongbaoname;
+                }
+                if (locationProjectNew == "")
+                {
+                    string thongbaolocation = "- Location project\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocation;
+                    else thongbao += thongbaolocation;
+                }
+
+                if (thongbao != null) MessageBox.Show(thongbao);
+                else
+                {
+                    Project project = new Project(numberProject, null, null);
+                    IObjectSet result = database.DB.QueryByExample(project);
+                    project = (Project)result[0];
+
+                    project.PName = nameProjectNew;
+                    project.Location = locationProjectNew;
+
+                    if (numberDepartmentOld == numberDepartmentNew)
+                    {
+                        database.DB.Store(project);
+
+                        result = database.result_Project();
+                        int countNew = result.Count;
+                        string[] data_ProjectNew = new string[countNew + 1];
+
+                        data_ProjectNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Project temp = (Project)result[i];
+                            data_ProjectNew[i + 1] = temp._ToString();
+                        }
+
+                        File.WriteAllLines("data_Project.txt", data_ProjectNew);
+                    }
+                    else if (numberDepartmentOld != numberDepartmentNew)
+                    {
+                        Department departmentOld = new Department(numberDepartmentOld, null, null);
+                        result = database.DB.QueryByExample(departmentOld);
+                        departmentOld = (Department)result[0];
+
+                        Department departmentNew = new Department(numberDepartmentNew, null, null);
+                        result = database.DB.QueryByExample(departmentNew);
+                        departmentNew = (Department)result[0];
+
+                        departmentOld.Projects.Remove(project);
+                        if (departmentNew.Projects == null) departmentNew.Projects = new List<Project>();
+                        departmentNew.Projects.Add(project);
+                        project.ControlledBy = departmentNew;
+
+                        database.DB.Store(project);
+                        database.DB.Store(departmentOld);
+                        database.DB.Store(departmentNew);
+
+                        result = database.result_Project();
+                        int countNew = result.Count;
+                        string[] data_ProjectNew = new string[countNew + 1];
+
+                        data_ProjectNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Project temp = (Project)result[i];
+                            data_ProjectNew[i + 1] = temp._ToString();
+                        }
+
+                        File.WriteAllLines("data_Project.txt", data_ProjectNew);
+
+                        result = database.result_Department();
+                        int count = 0;
+                        string[] data_Temp = new string[result.Count];
+
+                        for (int i = 0; i < result.Count; ++i)
+                        {
+                            Department department = (Department)result[i];
+                            if (department.Projects != null && department.Projects.Count != 0)
+                            {
+                                data_Temp[i] = department.DNumber.ToString() + ": ";
+                                for (int j = 0; j < department.Projects.Count; ++j)
+                                {
+                                    if (j == 0) data_Temp[i] += department.Projects[j].PNumber.ToString();
+                                    else data_Temp[i] += ", " + department.Projects[j].PNumber.ToString();
+                                }
+                                ++count;
+                            }
+                        }
+
+                        string[] data_ControlledByNew = new string[count + 1];
+                        data_ControlledByNew[0] = count.ToString();
+                        for (int i = 0; i < count; ++i)
+                        {
+                            data_ControlledByNew[i + 1] = data_Temp[i];
+                        }
+
+                        File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+                    }
+
+                    MessageBox.Show("Sửa thành công");
+
+                    LoadData();
+                }
+            }
+        }
+
+        private void button_AddDepartment_Click(object sender, EventArgs e)
+        {
+            int numberDepartment = -1;
+            if (textBox_NumberDepartment.Text != "") numberDepartment = int.Parse(textBox_NumberDepartment.Text);
+            string nameDepartment = textBox_NameDepartment.Text;
+            string locationsDepartment = textBox_LocationsDepartment.Text;
+
+            int ssnManager = -1;
+            if (textBox_SsnManager.Text != "") ssnManager = int.Parse(textBox_SsnManager.Text);
+            string mgrStartDate = textBox_MgrStartDate.Text;
 
             string thongbao = null;
 
-            if(name_ProjectNew == "")
+            if(numberDepartment == -1)
             {
-                string thongbaoname = "- Name project\n";
+                string thongbaonumber = "- Number department\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaonumber;
+                else thongbao += thongbaonumber;
+            }
+            if (nameDepartment == "")
+            {
+                string thongbaoname = "- Name department\n";
                 if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
                 else thongbao += thongbaoname;
             }
-            if(location_ProjectNew == "")
+            if (locationsDepartment == "")
             {
-                string thongbaolocation = "- Location project\n";
-                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocation;
-                else thongbao += thongbaolocation;
+                string thongbaolocations = "- Locations department\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocations;
+                else thongbao += thongbaolocations;
+            }
+            if (ssnManager == -1)
+            {
+                string thongbaossn = "- Ssn manager\n- Name manager\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaossn;
+                else thongbao += thongbaossn;
+            }
+            if(mgrStartDate == "")
+            {
+                string thongbaodate = "- Manager start date\n";
+                if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaodate;
+                else thongbao += thongbaodate;
             }
 
             if (thongbao != null) MessageBox.Show(thongbao);
             else
             {
-                Project project = new Project(number_Project, null, null);
-                IObjectSet result = database.DB.QueryByExample(project);
-                project = (Project)result[0];
-
-                project.PName = name_ProjectNew;
-                project.Location = location_ProjectNew;
-
-                if (number_DepartmentOld == number_DepartmentNew)
+                Department department = new Department(numberDepartment, null, null);
+                IObjectSet result = database.DB.QueryByExample(department);
+                if (result.Count != 0) MessageBox.Show("Number department bị trùng, vui lòng nhập lại");
+                else
                 {
-                    database.DB.Store(project);
-
-                    result = database.result_Project();
-                    int countNew = result.Count;
-                    string[] data_ProjectNew = new string[countNew + 1];
-
-                    data_ProjectNew[0] = countNew.ToString();
-                    for (int i = 0; i < countNew; ++i)
+                    Employee employee = new Employee(ssnManager, null, null, null, null, null, 0, null);
+                    result = database.DB.QueryByExample(employee);
+                    employee = (Employee)result[0];
+                    if (employee.Manager != null) MessageBox.Show("Một department được quản lí bởi employee này, vui lòng nhập lại");
+                    else
                     {
-                        Project temp = (Project)result[i];
-                        data_ProjectNew[i + 1] = temp._ToString();
-                    }
+                        List<string> Locations = new List<string>();
+                        string[] listLocations = locationsDepartment.Split(',');
+                        for (int i = 0; i < listLocations.Length; ++i)
+                        {
+                            while (listLocations[i][0] == ' ') listLocations[i] = listLocations[i].Remove(0, 1);
+                            while (listLocations[i][listLocations[i].Length - 1] == ' ') listLocations[i] = listLocations[i].Remove(listLocations[i].Length - 1, 1);
 
-                    File.WriteAllLines("data_Project.txt", data_ProjectNew);
+                            Locations.Add(listLocations[i]);
+                        }
+
+                        department = new Department(numberDepartment, nameDepartment, Locations);
+
+                        Employee manager = new Employee(ssnManager, null, null, null, null, null, 0, null);
+                        result = database.DB.QueryByExample(manager);
+
+                        department.Manager = manager;
+                        department.MgrStartDate = mgrStartDate;
+                        manager.Manager = department;
+
+                        database.DB.Store(department);
+                        database.DB.Store(manager);
+
+                        result = database.result_Employee();
+                        int count = 0;
+                        string[] data_Temp = new string[result.Count];
+
+                        for (int i = 0; i < result.Count; ++i)
+                        {
+                            employee = (Employee)result[i];
+                            if (employee.Manager != null)
+                            {
+                                string lineManager = employee.Manager.DNumber.ToString() + "," + employee.Ssn.ToString() + "," + employee.Manager.MgrStartDate;
+                                data_Temp[count] = lineManager;
+                                ++count;
+                            }
+                        }
+
+                        string[] data_ManagerNew = new string[count + 1];
+                        data_ManagerNew[0] = count.ToString();
+                        for (int i = 0; i < count; ++i)
+                        {
+                            data_ManagerNew[i + 1] = data_Temp[i];
+                        }
+
+                        File.WriteAllLines("SetManager.txt", data_ManagerNew);
+
+                        result = database.result_Department();
+                        int countNew = result.Count;
+                        string[] data_DepartmentNew = new string[countNew + 1];
+
+                        data_DepartmentNew[0] = countNew.ToString();
+                        for (int i = 0; i < countNew; ++i)
+                        {
+                            Department temp = (Department)result[i];
+                            string lineDepartment = temp.DNumber.ToString() + ":" + temp.DName + ":";
+                            for (int j = 0; j < temp.Locations.Count; ++j)
+                            {
+                                if (j == 0) lineDepartment += temp.Locations[j];
+                                else lineDepartment += "," + temp.Locations[j];
+                            }
+                            data_DepartmentNew[i + 1] = lineDepartment;
+                        }
+
+                        File.WriteAllLines("data_Department.txt", data_DepartmentNew);
+
+                        MessageBox.Show("Thêm thành công");
+
+                        LoadData();
+                    }
                 }
-                else if (number_DepartmentOld != number_DepartmentNew)
+            }
+        }
+        private void button_ModifyDepartment_Click(object sender, EventArgs e)
+        {
+            int numberDepartment = -1;
+            if (textBox_NumberDepartment.Text != "") numberDepartment = int.Parse(textBox_NumberDepartment.Text);
+            string nameDepartment = textBox_NameDepartment.Text;
+            string locationsDepartment = textBox_LocationsDepartment.Text;
+
+            int ssnManagerOld = -1;
+            if (textBox_SsnManagerOld.Text != "") ssnManagerOld = int.Parse(textBox_SsnManagerOld.Text);
+            int ssnManagerNew = -1;
+            if (textBox_SsnManager.Text != "") ssnManagerNew = int.Parse(textBox_SsnManager.Text);
+            string mgrStartDate = textBox_MgrStartDate.Text;
+
+            if (numberDepartment == -1) MessageBox.Show("Bạn chưa chọn department để sửa");
+            else
+            {
+                string thongbao = null;
+
+                if(nameDepartment == "")
                 {
-                    Department departmentOld = new Department(number_DepartmentOld, name_DepartmentOld, null);
-                    result = database.DB.QueryByExample(departmentOld);
-                    departmentOld = (Department)result[0];
+                    string thongbaoname = "- Name department\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaoname;
+                    else thongbao += thongbaoname;
+                }
+                if(locationsDepartment == "")
+                {
+                    string thongbaolocations = "- Locations department\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaolocations;
+                    else thongbao += thongbaolocations;
+                }
+                if(ssnManagerNew == -1)
+                {
+                    string thongbaossn = "- Ssn manager\n";
+                    if (thongbao == null) thongbao = "Bạn chưa nhập:\n" + thongbaossn;
+                    else thongbao += thongbaossn;
+                }
 
-                    Department departmentNew = new Department(number_DepartmentNew, name_DepartmentNew, null);
-                    result = database.DB.QueryByExample(departmentNew);
-                    departmentNew = (Department)result[0];
+                if (thongbao != null) MessageBox.Show(thongbao);
+                else
+                {
+                    Department department = new Department(numberDepartment, null, null);
+                    IObjectSet result = database.DB.QueryByExample(department);
+                    department = (Department)result[0];
 
-                    departmentOld.Projects.Remove(project);
-                    if (departmentNew.Projects == null) departmentNew.Projects = new List<Project>();
-                    departmentNew.Projects.Add(project);
-                    project.ControlledBy = departmentNew;
-
-                    database.DB.Store(project);
-                    database.DB.Store(departmentOld);
-                    database.DB.Store(departmentNew);
-
-                    result = database.result_Project();
-                    int countNew = result.Count;
-                    string[] data_ProjectNew = new string[countNew + 1];
-
-                    data_ProjectNew[0] = countNew.ToString();
-                    for (int i = 0; i < countNew; ++i)
+                    List<string> Locations = new List<string>();
+                    string[] listLocations = locationsDepartment.Split(',');
+                    for (int i = 0; i < listLocations.Length; ++i)
                     {
-                        Project temp = (Project)result[i];
-                        data_ProjectNew[i + 1] = temp._ToString();
+                        while (listLocations[i][0] == ' ') listLocations[i] = listLocations[i].Remove(0, 1);
+                        while (listLocations[i][listLocations[i].Length - 1] == ' ') listLocations[i] = listLocations[i].Remove(listLocations[i].Length - 1, 1);
+
+                        Locations.Add(listLocations[i]);
                     }
 
-                    File.WriteAllLines("data_Project.txt", data_ProjectNew);
+                    department.DName = nameDepartment;
+                    department.Locations = Locations;
+                    department.MgrStartDate = mgrStartDate;
 
-                    result = database.result_Department();
+                    if (ssnManagerOld == ssnManagerNew)
+                    {
+                        database.DB.Store(department);
+                    }
+                    else if(ssnManagerOld != ssnManagerNew)
+                    {
+                        if(ssnManagerOld == -1)
+                        {
+                            Employee managerNew = new Employee(ssnManagerNew, null, null, null, null, null, 0, null);
+                            result = database.DB.QueryByExample(managerNew);
+                            managerNew = (Employee)result[0];
+
+                            managerNew.Manager = department;
+                            department.Manager = managerNew;
+
+                            database.DB.Store(managerNew);
+                            database.DB.Store(department);
+                        }
+                        else if(ssnManagerOld != -1)
+                        {
+                            Employee managerNew = new Employee(ssnManagerNew, null, null, null, null, null, 0, null);
+                            result = database.DB.QueryByExample(managerNew);
+                            managerNew = (Employee)result[0];
+
+                            Employee managerOld = new Employee(ssnManagerOld, null, null, null, null, null, 0, null);
+                            result = database.DB.QueryByExample(managerOld);
+                            managerOld = (Employee)result[0];
+
+                            managerOld.Manager = null;
+                            managerNew.Manager = department;
+                            department.Manager = managerNew;
+
+                            database.DB.Store(managerOld);
+                            database.DB.Store(managerNew);
+                            database.DB.Store(department);
+                        }
+                    }
+
+                    result = database.result_Employee();
                     int count = 0;
                     string[] data_Temp = new string[result.Count];
 
                     for (int i = 0; i < result.Count; ++i)
                     {
-                        Department department = (Department)result[i];
-                        if (department.Projects != null && department.Projects.Count != 0)
+                        Employee employee = (Employee)result[i];
+                        if (employee.Manager != null)
                         {
-                            data_Temp[i] = department.DNumber.ToString() + ": ";
-                            for (int j = 0; j < department.Projects.Count; ++j)
-                            {
-                                if (j == 0) data_Temp[i] += department.Projects[j].PNumber.ToString();
-                                else data_Temp[i] += ", " + department.Projects[j].PNumber.ToString();
-                            }
+                            string lineManager = employee.Manager.DNumber.ToString() + "," + employee.Ssn.ToString() + "," + employee.Manager.MgrStartDate;
+                            data_Temp[count] = lineManager;
                             ++count;
                         }
                     }
 
-                    string[] data_ControlledByNew = new string[count + 1];
-                    data_ControlledByNew[0] = count.ToString();
+                    string[] data_ManagerNew = new string[count + 1];
+                    data_ManagerNew[0] = count.ToString();
                     for (int i = 0; i < count; ++i)
                     {
-                        data_ControlledByNew[i + 1] = data_Temp[i];
+                        data_ManagerNew[i + 1] = data_Temp[i];
                     }
 
-                    File.WriteAllLines("SetControlledBy.txt", data_ControlledByNew);
+                    File.WriteAllLines("SetManager.txt", data_ManagerNew);
+
+                    result = database.result_Department();
+                    int countNew = result.Count;
+                    string[] data_DepartmentNew = new string[countNew + 1];
+
+                    data_DepartmentNew[0] = countNew.ToString();
+                    for (int i = 0; i < countNew; ++i)
+                    {
+                        Department temp = (Department)result[i];
+                        string lineDepartment = temp.DNumber.ToString() + ":" + temp.DName + ":";
+                        for (int j = 0; j < temp.Locations.Count; ++j)
+                        {
+                            if (j == 0) lineDepartment += temp.Locations[j];
+                            else lineDepartment += "," + temp.Locations[j];
+                        }
+                        data_DepartmentNew[i + 1] = lineDepartment;
+                    }
+
+                    File.WriteAllLines("data_Department.txt", data_DepartmentNew);
+
+                    MessageBox.Show("Thêm thành công");
+
+                    LoadData();
+                }
+            }
+        }
+        private void button_DeleteDepartment_Click(object sender, EventArgs e)
+        {
+            int numberDepartment = -1;
+            if (textBox_NumberDepartment.Text != "") numberDepartment = int.Parse(textBox_NumberDepartment.Text);
+            int ssnManager = -1;
+            if (textBox_SsnManagerOld.Text != "") ssnManager = int.Parse(textBox_SsnManagerOld.Text);
+
+            if (numberDepartment == -1 && ssnManager == -1) MessageBox.Show("Bạn chưa chọn department để xóa");
+            else
+            {
+                Department department = new Department(numberDepartment, null, null);
+                IObjectSet result = database.DB.QueryByExample(department);
+                department = (Department)result[0];
+
+                Employee manager = new Employee(ssnManager, null, null, null, null, null, 0, null);
+                result = database.DB.QueryByExample(manager);
+                manager = (Employee)result[0];
+
+                manager.Manager = null;
+
+                database.DB.Store(manager);
+                database.DB.Delete(department);
+
+                result = database.result_Employee();
+                int count = 0;
+                string[] data_Temp = new string[result.Count];
+
+                for (int i = 0; i < result.Count; ++i)
+                {
+                    Employee employee = (Employee)result[i];
+                    if (employee.Manager != null)
+                    {
+                        string lineManager = employee.Manager.DNumber.ToString() + "," + employee.Ssn.ToString() + "," + employee.Manager.MgrStartDate;
+                        data_Temp[count] = lineManager;
+                        ++count;
+                    }
                 }
 
-                MessageBox.Show("Sửa thành công");
+                string[] data_ManagerNew = new string[count + 1];
+                data_ManagerNew[0] = count.ToString();
+                for (int i = 0; i < count; ++i)
+                {
+                    data_ManagerNew[i + 1] = data_Temp[i];
+                }
+
+                File.WriteAllLines("SetManager.txt", data_ManagerNew);
+
+                result = database.result_Department();
+                int countNew = result.Count;
+                string[] data_DepartmentNew = new string[countNew + 1];
+
+                data_DepartmentNew[0] = countNew.ToString();
+                for (int i = 0; i < countNew; ++i)
+                {
+                    Department temp = (Department)result[i];
+                    string lineDepartment = temp.DNumber.ToString() + ":" + temp.DName + ":";
+                    for (int j = 0; j < temp.Locations.Count; ++j)
+                    {
+                        if (j == 0) lineDepartment += temp.Locations[j];
+                        else lineDepartment += "," + temp.Locations[j];
+                    }
+                    data_DepartmentNew[i + 1] = lineDepartment;
+                }
+
+                File.WriteAllLines("data_Department.txt", data_DepartmentNew);
+
+                MessageBox.Show("Xóa thành công");
 
                 LoadData();
             }
