@@ -564,38 +564,36 @@ namespace Lab_5
                         string[] fields = line.Split(':');
 
                         int ssn_Supervisor = int.Parse(fields[0]);
-                        string list_SsnSupervisees = fields[1];
-                        string[] fields_SsnSupervisees = list_SsnSupervisees.Split(',');
+                        string[] listSsnSupervisees = fields[1].Split(',');
 
-                        Employee e_Supervisor = null;
                         List<Employee> Supervisees = new List<Employee>();
-                        Employee e_Supervisees = null;
 
                         Employee supervisor = new Employee(ssn_Supervisor, null, null, null, null, null, 0, null);
-                        IObjectSet result_Supervisor = DB.QueryByExample(supervisor);
-                        if (result_Supervisor.Count != 0)
+                        IObjectSet result = DB.QueryByExample(supervisor);
+                        if (result.Count != 0)
                         {
-                            e_Supervisor = (Employee)result_Supervisor[0];
-                        }
+                            supervisor = (Employee)result[0];
+                            supervisor.Supervisees = new List<Employee>();
 
-                        for (int j = 0; j < fields_SsnSupervisees.Length; ++j)
-                        {
-                            int ssn_Supervisees = int.Parse(fields_SsnSupervisees[j]);
-                            Employee supervisees = new Employee(ssn_Supervisees, null, null, null, null, null, 0, null);
-                            IObjectSet result_Supervisees = DB.QueryByExample(supervisees);
-                            if (result_Supervisees.Count != 0 && e_Supervisor != null)
+                            for (int j = 0; j < listSsnSupervisees.Length; ++j)
                             {
-                                e_Supervisees = (Employee)result_Supervisees[0];
-                                Supervisees.Add(e_Supervisees);
-                                e_Supervisees.Supervisor = e_Supervisor;
-                                DB.Store(e_Supervisees);
+                                int ssn_Supervisees = int.Parse(listSsnSupervisees[j]);
+                                Employee supervisees = new Employee(ssn_Supervisees, null, null, null, null, null, 0, null);
+                                result = DB.QueryByExample(supervisees);
+                                if (result.Count != 0)
+                                {
+                                    supervisees = (Employee)result[0];
+                                    Supervisees.Add(supervisees);
+                                    supervisees.Supervisor = supervisor;
+                                    DB.Store(supervisees);
+                                }
                             }
-                        }
 
-                        if (Supervisees != null && e_Supervisor != null)
-                        {
-                            e_Supervisor.Supervisees = Supervisees;
-                            DB.Store(e_Supervisor);
+                            if (Supervisees.Count != 0)
+                            {
+                                supervisor.Supervisees = Supervisees;
+                                DB.Store(supervisor);
+                            }
                         }
                     }
                 }
